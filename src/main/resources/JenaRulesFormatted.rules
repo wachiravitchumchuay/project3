@@ -1,4 +1,4 @@
-@prefix re: <http://project3.demo/schema#> .
+@prefix re: <http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal# .
 
 [Jena1:
     (?Restaurant re:hasFoodType ?FoodType)
