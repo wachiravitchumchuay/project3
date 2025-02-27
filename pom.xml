@@ -51,6 +51,12 @@
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>apache-jena-libs</artifactId>
+			<version>4.3.2</version>
+			<type>pom</type>
+		</dependency>
 	</dependencies>
 
 	<build>
