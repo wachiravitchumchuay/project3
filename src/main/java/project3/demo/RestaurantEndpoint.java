@@ -1,19 +1,12 @@
 package project3.demo;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.jena.query.Query;
-import org.apache.jena.query.QueryExecution;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.QueryFactory;
-import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
-import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.util.FileManager;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.vocabulary.RDF;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -28,44 +21,104 @@ public class RestaurantEndpoint {
 
 	private static final String NAMESPACE_URI = "http://project3.demo/schema";
 	private static final String ONTOLOGY_FILE = "RestaurantOntology_03_12_24.rdf";
+	private static final String NS = "http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#";
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getRestaurantRequest")
 	@ResponsePayload
 	public GetRestaurantResponse getRestaurant(@RequestPayload GetRestaurantRequest request) {
 		GetRestaurantResponse response = new GetRestaurantResponse();
-		Model model = ModelFactory.createDefaultModel();
-		InputStream in = FileManager.getInternal().open(ONTOLOGY_FILE);
-		if (in == null) {
-			throw new IllegalArgumentException("File: " + ONTOLOGY_FILE + " not found");
-		}
-		model.read(in, null);
 
-		String queryString = """
-				PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-				PREFIX owl: <http://www.w3.org/2002/07/owl#>
-				PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-				PREFIX re: <http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#>
+		Model model = RDFDataMgr.loadModel(ONTOLOGY_FILE);
+		StmtIterator restauranIterator = model.listStatements(null, RDF.type, model.createResource(NS + "Restaurant"));
+		while (restauranIterator.hasNext()) {
+			Statement restaurantStmt = restauranIterator.nextStatement();
+			Resource restaurantResource = restaurantStmt.getSubject();
 
-				SELECT ?resName
-				WHERE {
-				    ?subject rdf:type re:Restaurant .
-				    ?subject re:RestaurantName ?resName .
-				}
-				""";
-		System.out.println("Query: " + queryString);
-		Query query = QueryFactory.create(queryString);
-		try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
-			ResultSet results = qexec.execSelect();
-			List<Restaurants> restaurantList = new ArrayList<>();
-			while (results.hasNext()) {
-				QuerySolution soln = results.nextSolution();
-				Literal nameLiteral = soln.getLiteral("resName");
-				String name = nameLiteral != null ? nameLiteral.getString() : "Unknown";
-				Restaurants restaurant = new Restaurants();
-				restaurant.setRestaurantName(name);
-				restaurantList.add(restaurant);
+			Restaurants restaurant = new Restaurants();
+
+			// Restaurant Name
+			Statement restaurantNameStmt = restaurantResource.getProperty(model.createProperty(NS + "RestaurantName"));
+			if (restaurantNameStmt != null) {
+				restaurant.setRestaurantName(restaurantNameStmt.getString());
 			}
-			response.getRestaurants().addAll(restaurantList);
+
+			// hasRestaurantNationality
+			Property hasRestaurantNationalityProperty = model.createProperty(NS + "hasRestaurantNationality");
+			Statement hasRestaurantNationalityStmt = restaurantResource.getProperty(hasRestaurantNationalityProperty);
+			if (hasRestaurantNationalityStmt != null) {
+				Resource hasRestaurantNationalityResource = hasRestaurantNationalityStmt.getObject().asResource();
+				restaurant.setRestaurantNationality(hasRestaurantNationalityResource.getLocalName());
+			}
+
+			// hasRestaurantType
+			Property hasRestaurantTypeProperty = model.createProperty(NS + "hasRestaurantType");
+			Statement hasRestaurantTypeStmt = restaurantResource.getProperty(hasRestaurantTypeProperty);
+			if (hasRestaurantTypeStmt != null) {
+				Resource hasRestaurantTypeResource = hasRestaurantTypeStmt.getObject().asResource();
+				restaurant.setRestaurantType(hasRestaurantTypeResource.getLocalName());
+			}
+
+			// hasRestaurantPlace (with district lookup)
+			Property hasRestaurantPlaceProperty = model.createProperty(NS + "hasRestaurantPlace");
+			Statement hasRestaurantPlaceStmt = restaurantResource.getProperty(hasRestaurantPlaceProperty);
+			if (hasRestaurantPlaceStmt != null) {
+				Resource hasRestaurantPlaceResource = hasRestaurantPlaceStmt.getObject().asResource();
+				Statement districtStmt = hasRestaurantPlaceResource.getProperty(model.createProperty(NS + "District"));
+				if (districtStmt != null) {
+					restaurant.setDistrict(districtStmt.getString());
+				}
+			}
+
+			// hasFoodType (with fat, protein, carb lookup)
+			Property hasFoodTypeProperty = model.createProperty(NS + "hasFoodType");
+			Statement hasFoodTypeStmt = restaurantResource.getProperty(hasFoodTypeProperty);
+			if (hasFoodTypeStmt != null) {
+				Resource hasFoodTypeResource = hasFoodTypeStmt.getObject().asResource();
+				restaurant.setFoodType(hasFoodTypeResource.getLocalName());
+
+				Statement fatStmt = hasFoodTypeResource.getProperty(model.createProperty(NS + "Fat"));
+				if (fatStmt != null) {
+					restaurant.setFat(fatStmt.getString());
+				}
+
+				Statement proteinStmt = hasFoodTypeResource.getProperty(model.createProperty(NS + "Protein"));
+				if (proteinStmt != null) {
+					restaurant.setProtein(proteinStmt.getString());
+				}
+
+				Statement carbStmt = hasFoodTypeResource.getProperty(model.createProperty(NS + "Carbohydrates"));
+				if (carbStmt != null) {
+					restaurant.setCarbohydrates(carbStmt.getString());
+				}
+			}
+
+			// Budget handling (min/max logic)
+			Property budgetProperty = model.createProperty(NS + "Budget");
+			StmtIterator budgetIterator = restaurantResource.listProperties(budgetProperty);
+
+			Double minBudget = null;
+			Double maxBudget = null;
+
+			while (budgetIterator.hasNext()) {
+				Statement budgetStmt = budgetIterator.nextStatement();
+				double budgetValue = Double.parseDouble(budgetStmt.getObject().asLiteral().getString());
+
+				if (minBudget == null || budgetValue < minBudget) {
+					minBudget = budgetValue;
+				}
+				if (maxBudget == null || budgetValue > maxBudget) {
+					maxBudget = budgetValue;
+				}
+			}
+
+			if (minBudget != null) {
+				restaurant.setCleanMinBudget(Double.toString(minBudget));
+			}
+			if (maxBudget != null) {
+				restaurant.setCleanMaxBudget(Double.toString(maxBudget));
+			}
+
+			response.getRestaurants().add(restaurant);
 		}
 		return response;
 	}
