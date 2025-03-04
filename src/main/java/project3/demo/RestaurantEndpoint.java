@@ -41,17 +41,17 @@ public class RestaurantEndpoint {
 		model.read(in, null);
 
 		String queryString = """
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX re: <http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#>
+				PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+				PREFIX owl: <http://www.w3.org/2002/07/owl#>
+				PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+				PREFIX re: <http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#>
 
-SELECT ?resName
-WHERE {  
-    ?subject rdf:type re:Restaurant .
-    ?subject re:RestaurantName ?resName .
-}
-""";
+				SELECT ?resName
+				WHERE {
+				    ?subject rdf:type re:Restaurant .
+				    ?subject re:RestaurantName ?resName .
+				}
+				""";
 		System.out.println("Query: " + queryString);
 		Query query = QueryFactory.create(queryString);
 		try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {

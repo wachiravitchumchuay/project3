@@ -2,19 +2,25 @@
 
 	<xs:element name="getRestaurantRequest">
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="name" type="xs:string"/>
-			</xs:sequence>
+			<xs:sequence/>
 		</xs:complexType>
 	</xs:element>
-
 	<xs:element name="getRestaurantResponse">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="restaurants" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="restaurantName" type="xs:string"/>
+							<xs:element name="carbohydrates" type="xs:string"/>
+							<xs:element name="restaurant_nationality" type="xs:string"/>
+							<xs:element name="district" type="xs:string"/>
+							<xs:element name="protein" type="xs:string"/>
+							<xs:element name="fat" type="xs:string"/>
+							<xs:element name="restaurant_type" type="xs:string"/>
+							<xs:element name="food_type" type="xs:string"/>
+							<xs:element name="clean_max_budget" type="xs:string"/>
+							<xs:element name="clean_min_budget" type="xs:string"/>
+							<xs:element name="restaurant_name" type="xs:string"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
@@ -25,28 +31,44 @@
 	<xs:element name="getRestaurantRecommendationRequest">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="preRunProteinConsumtion" type="xs:string"/>
-				<xs:element name="postRunProteinConsumtion" type="xs:string"/>
-				<xs:element name="postRunFatConsumtion" type="xs:string"/>
-				<xs:element name="postRunCarbConsumtion" type="xs:string"/>
 				<xs:element name="runnerType" type="xs:string"/>
-				<xs:element name="restaurantTypeInterest" type="xs:string"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-
-	<xs:element name="getRestaurantRecommendationResponse">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="restaurants" minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="restaurantType" type="xs:string"/>
+				<xs:element name="protein" type="xs:string"/>
+				<xs:element name="fat" type="xs:string"/>
+				<xs:element name="carb" type="xs:string"/>
+				<xs:element name="budgetMin" type="xs:string"/>
+				<xs:element name="budgetMax" type="xs:string"/>
+				<xs:element name="foodTypes" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="restaurantName" type="xs:string"/>
-							<xs:element name="confidence" type="xs:string"/>
+							<xs:element name="foodType" type="xs:string"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="getRestaurantRecommendationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="restaurants" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="carbohydrates" type="xs:string"/>
+							<xs:element name="restaurant_nationality" type="xs:string"/>
+							<xs:element name="district" type="xs:string"/>
+							<xs:element name="protein" type="xs:string"/>
+							<xs:element name="fat" type="xs:string"/>
+							<xs:element name="restaurant_type" type="xs:string"/>
+							<xs:element name="food_type" type="xs:string"/>
+							<xs:element name="clean_max_budget" type="xs:string"/>
+							<xs:element name="clean_min_budget" type="xs:string"/>
+							<xs:element name="restaurant_name" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
 </xs:schema>
