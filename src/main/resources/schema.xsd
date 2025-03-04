@@ -38,10 +38,10 @@
 				<xs:element name="carb" type="xs:string"/>
 				<xs:element name="budgetMin" type="xs:string"/>
 				<xs:element name="budgetMax" type="xs:string"/>
-				<xs:element name="foodTypes" minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="foodTypes">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="foodType" type="xs:string"/>
+							<xs:element name="foodType" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>

@@ -16,6 +16,14 @@ import demo.project3.schema.GetRestaurantRequest;
 import demo.project3.schema.GetRestaurantResponse;
 import demo.project3.schema.GetRestaurantResponse.Restaurants;
 
+// <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://project3.demo/schema">
+//    <soapenv:Header/>
+//    <soapenv:Body>
+//       <sch:getRestaurantRequest>
+//       </sch:getRestaurantRequest>
+//    </soapenv:Body>
+// </soapenv:Envelope>
+
 @Endpoint
 public class RestaurantEndpoint {
 
