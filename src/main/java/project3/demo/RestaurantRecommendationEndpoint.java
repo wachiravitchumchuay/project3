@@ -7,10 +7,18 @@ import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.ontology.OntProperty;
+import org.apache.jena.rdf.model.InfModel;
 import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.reasoner.Reasoner;
+import org.apache.jena.reasoner.rulesys.GenericRuleReasonerFactory;
 import org.apache.jena.vocabulary.RDF;
+import org.apache.jena.vocabulary.ReasonerVocabulary;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -105,9 +113,23 @@ public class RestaurantRecommendationEndpoint {
             Individual foodTypeInterest = model.getIndividual(NS + foodType);
             userInstance.addProperty(hasFoodTypeInterest, foodTypeInterest);
         }
+        Model rm = ModelFactory.createDefaultModel();
+        Resource configuration = rm.createResource();
+        configuration.addProperty(ReasonerVocabulary.PROPruleMode, "hybrid");
+        configuration.addProperty(ReasonerVocabulary.PROPruleSet, RULES_FILE);
+        System.out.println("1");
+        Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(configuration);
+        System.out.println("3");
+        InfModel inf = ModelFactory.createInfModel(reasoner, model);
+        System.out.println("2");
+        Resource user = inf.getResource(userURI);
+        Property p = inf.getProperty(NS, "hasRecommend");
+        Property c = inf.getProperty(NS, "confidence");
+        StmtIterator i1 = inf.listStatements(user, p, (RDFNode) null);
+
 
         try (FileOutputStream out = new FileOutputStream("testUser.rdf")) {
-            model.write(out, "RDF/XML");
+            inf.write(out, "RDF/XML");
         } catch (Exception e) {
             e.printStackTrace();
         }

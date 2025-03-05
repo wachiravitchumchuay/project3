@@ -1,4 +1,4 @@
-@prefix re: <http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal# .
+@prefix re: <http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#> .
 
 [Jena1: (?Restaurant re:hasFoodType ?FoodType) (?FoodType re:Fat "Medium")
 (?FoodType re:Protein "Medium") (?FoodType re:Carbohydrates "Medium") (?User
@@ -48,7 +48,7 @@ re:PreRunProteinConsumtion "Medium") (?User re:PreRunFatConsumtion "Medium")
 [Jena14: (?Restaurant re:hasFoodType ?FoodType) (?FoodType re:Fat "Medium")
 (?FoodType re:Protein "Medium") (?FoodType re:Carbohydrates "Medium") (?User
 re:PreRunFatConsumtion "Medium") (?User re:PostRunCarbConsumtion "Medium") (?User
-re:PostRunFatConsumtion "Medium") (?User re:PreRunProteinConsumtion "Medium") -> %
+re:PostRunFatConsumtion "Medium") (?User re:PreRunProteinConsumtion "Medium") ->
 (?User re:hasRecommend ?Restaurant) (?Restaurant re:confidence "93") ]
 
 [Jena15: (?Restaurant re:hasFoodType ?FoodType) (?FoodType re:Fat "Medium")
@@ -136,8 +136,8 @@ re:PreRunProteinConsumtion "Medium") (?User re:PreRunFatConsumtion "Medium")
 [Jena3: (?Restaurant re:hasFoodType ?FoodType) (?FoodType re:Fat "Medium")
 (?FoodType re:Protein "Medium") (?FoodType re:Carbohydrates "Medium") (?User
 re:PreRunFatConsumtion "Medium") (?User re:PostRunCarbConsumtion "Medium") (?User
-re:PostRunProteinConsumtion "Medium") (?User re:PreRunProteinConsumtion "Medium") -
-> (?User re:hasRecommend ?Restaurant) (?Restaurant re:confidence "100") ]
+re:PostRunProteinConsumtion "Medium") (?User re:PreRunProteinConsumtion "Medium") 
+-> (?User re:hasRecommend ?Restaurant) (?Restaurant re:confidence "100") ]
 
 [Jena11: (?Restaurant re:hasFoodType ?FoodType) (?FoodType re:Fat "Medium")
 (?FoodType re:Protein "Medium") (?FoodType re:Carbohydrates "Medium") (?User
