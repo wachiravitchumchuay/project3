@@ -14,6 +14,7 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.reasoner.rulesys.GenericRuleReasonerFactory;
@@ -117,15 +118,37 @@ public class RestaurantRecommendationEndpoint {
         Resource configuration = rm.createResource();
         configuration.addProperty(ReasonerVocabulary.PROPruleMode, "hybrid");
         configuration.addProperty(ReasonerVocabulary.PROPruleSet, RULES_FILE);
-        System.out.println("1");
         Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(configuration);
-        System.out.println("3");
         InfModel inf = ModelFactory.createInfModel(reasoner, model);
-        System.out.println("2");
-        Resource user = inf.getResource(userURI);
+        // Resource user = inf.getResource(userURI);
+        Resource user = inf.getResource(NS + "user3");
         Property p = inf.getProperty(NS, "hasRecommend");
         Property c = inf.getProperty(NS, "confidence");
         StmtIterator i1 = inf.listStatements(user, p, (RDFNode) null);
+
+
+        while (i1.hasNext()) {
+            Statement statement = i1.nextStatement();
+            RDFNode statementObj = statement.getObject();
+        
+            if (statementObj.isResource()) {
+                Resource restaurant = statementObj.asResource();
+                System.out.println("Recommendation: " + restaurant.getLocalName());
+        
+                StmtIterator i2 = inf.listStatements(restaurant, c, (RDFNode) null);
+                float highestConfidence = 0;
+                while (i2.hasNext()) {
+                    Statement confidenceStatement = i2.nextStatement();
+                    RDFNode confidence = confidenceStatement.getObject();
+                    float confidenceValue = confidence.asLiteral().getFloat();
+                    if (confidenceValue > highestConfidence) {
+                        highestConfidence = confidenceValue;
+                    }
+                }
+                System.out.println("Confidence: " + highestConfidence);
+
+            }
+        }
 
 
         try (FileOutputStream out = new FileOutputStream("testUser.rdf")) {
