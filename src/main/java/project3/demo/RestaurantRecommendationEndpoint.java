@@ -27,7 +27,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import demo.project3.schema.GetRestaurantRecommendationRequest;
 import demo.project3.schema.GetRestaurantRecommendationResponse;
-
+import demo.project3.schema.GetRestaurantRecommendationResponse.Restaurants;
 @Endpoint
 public class RestaurantRecommendationEndpoint {
 
@@ -120,23 +120,112 @@ public class RestaurantRecommendationEndpoint {
         configuration.addProperty(ReasonerVocabulary.PROPruleSet, RULES_FILE);
         Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(configuration);
         InfModel inf = ModelFactory.createInfModel(reasoner, model);
-        // Resource user = inf.getResource(userURI);
-        Resource user = inf.getResource(NS + "user3");
+        Resource user = inf.getResource(userURI);
         Property p = inf.getProperty(NS, "hasRecommend");
         Property c = inf.getProperty(NS, "confidence");
         StmtIterator i1 = inf.listStatements(user, p, (RDFNode) null);
 
 
         while (i1.hasNext()) {
+            
             Statement statement = i1.nextStatement();
             RDFNode statementObj = statement.getObject();
-        
+            Restaurants restaurantRes = new Restaurants();
             if (statementObj.isResource()) {
                 Resource restaurant = statementObj.asResource();
-                System.out.println("Recommendation: " + restaurant.getLocalName());
         
-                StmtIterator i2 = inf.listStatements(restaurant, c, (RDFNode) null);
+                Statement restaurantNameStmt = restaurant.getProperty(model.createProperty(NS + "RestaurantName"));
+                String restaurantName = "";
+                if (restaurantNameStmt != null) {
+                    restaurantName = restaurantNameStmt.getString();
+                }
+                restaurantRes.setRestaurantName(restaurantName);
+        
+                Property hasRestaurantNationality = model.createProperty(NS + "hasRestaurantNationality");
+                Statement nationalityStmt = restaurant.getProperty(hasRestaurantNationality);
+                String restaurantNationality = "";
+                if (nationalityStmt != null && nationalityStmt.getObject().isResource()) {
+                    restaurantNationality = nationalityStmt.getObject().asResource().getLocalName();
+                }
+                restaurantRes.setRestaurantNationality(restaurantNationality);
+        
+                Property hasRestaurantType = model.createProperty(NS + "hasRestaurantType");
+                Statement typeStmt = restaurant.getProperty(hasRestaurantType);
+                String restaurantType = "";
+                if (typeStmt != null && typeStmt.getObject().isResource()) {
+                    restaurantType = typeStmt.getObject().asResource().getLocalName();
+                }
+                restaurantRes.setRestaurantType(restaurantType);
+        
+                Property hasRestaurantPlace = model.createProperty(NS + "hasRestaurantPlace");
+                Statement placeStmt = restaurant.getProperty(hasRestaurantPlace);
+                String district = "";
+                if (placeStmt != null && placeStmt.getObject().isResource()) {
+                    Resource placeResource = placeStmt.getObject().asResource();
+                    Statement districtStmt = placeResource.getProperty(model.createProperty(NS + "District"));
+                    if (districtStmt != null) {
+                        district = districtStmt.getString();
+                    }
+                }
+                restaurantRes.setDistrict(district);
+        
+                Property hasFoodType = model.createProperty(NS + "hasFoodType");
+                Statement foodTypeStmt = restaurant.getProperty(hasFoodType);
+                String foodType = "";
+                String fat = "";
+                String protein = "";
+                String carbohydrates = "";
+        
+                if (foodTypeStmt != null && foodTypeStmt.getObject().isResource()) {
+                    Resource foodTypeResource = foodTypeStmt.getObject().asResource();
+                    foodType = foodTypeResource.getLocalName();
+        
+                    Statement fatStmt = foodTypeResource.getProperty(model.createProperty(NS + "Fat"));
+                    if (fatStmt != null) {
+                        fat = fatStmt.getString();
+                    }
+        
+                    Statement proteinStmt = foodTypeResource.getProperty(model.createProperty(NS + "Protein"));
+                    if (proteinStmt != null) {
+                        protein = proteinStmt.getString();
+                    }
+        
+                    Statement carbStmt = foodTypeResource.getProperty(model.createProperty(NS + "Carbohydrates"));
+                    if (carbStmt != null) {
+                        carbohydrates = carbStmt.getString();
+                    }
+                }
+                restaurantRes.setFoodType(foodType);
+                restaurantRes.setFat(fat);
+                restaurantRes.setProtein(protein);
+                restaurantRes.setCarbohydrates(carbohydrates);
+        
+                Property budgetProperty = model.createProperty(NS + "Budget");
+                StmtIterator budgetIterator = restaurant.listProperties(budgetProperty);
+        
+                Double minBudget = null;
+                Double maxBudget = null;
+        
+                while (budgetIterator.hasNext()) {
+                    Statement budgetStmt = budgetIterator.nextStatement();
+                    double budgetValue = Double.parseDouble(budgetStmt.getObject().asLiteral().getString());
+        
+                    if (minBudget == null || budgetValue < minBudget) {
+                        minBudget = budgetValue;
+                    }
+                    if (maxBudget == null || budgetValue > maxBudget) {
+                        maxBudget = budgetValue;
+                    }
+                }
+        
+                String cleanMinBudget = minBudget != null ? minBudget.toString() : "";
+                String cleanMaxBudget = maxBudget != null ? maxBudget.toString() : "";
+        
+                restaurantRes.setCleanMinBudget(cleanMinBudget);
+                restaurantRes.setCleanMaxBudget(cleanMaxBudget);
+        
                 float highestConfidence = 0;
+                StmtIterator i2 = inf.listStatements(restaurant, model.createProperty(NS + "confidence"), (RDFNode) null);
                 while (i2.hasNext()) {
                     Statement confidenceStatement = i2.nextStatement();
                     RDFNode confidence = confidenceStatement.getObject();
@@ -145,9 +234,10 @@ public class RestaurantRecommendationEndpoint {
                         highestConfidence = confidenceValue;
                     }
                 }
-                System.out.println("Confidence: " + highestConfidence);
-
+                restaurantRes.setConfidence(String.valueOf(highestConfidence));
+                response.getRestaurants().add(restaurantRes);
             }
+            
         }
 
 

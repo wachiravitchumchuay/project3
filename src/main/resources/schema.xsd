@@ -82,6 +82,7 @@
 				<xs:element name="restaurants" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
 						<xs:sequence>
+							<xs:element name="confidence" type="xs:string"/>
 							<xs:element name="carbohydrates" type="xs:string"/>
 							<xs:element name="restaurant_nationality" type="xs:string"/>
 							<xs:element name="district" type="xs:string"/>
