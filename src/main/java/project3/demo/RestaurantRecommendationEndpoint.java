@@ -28,6 +28,53 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import demo.project3.schema.GetRestaurantRecommendationRequest;
 import demo.project3.schema.GetRestaurantRecommendationResponse;
 import demo.project3.schema.GetRestaurantRecommendationResponse.Restaurants;
+
+// <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://project3.demo/schema">
+//    <soapenv:Header/>
+//    <soapenv:Body>
+//       <sch:getRestaurantRecommendationRequest>
+//          <PreRunCarbConsumtion>Medium</PreRunCarbConsumtion>
+//          <PreRunFatConsumtion>Medium</PreRunFatConsumtion>
+//          <PreRunProteinConsumtion>Medium</PreRunProteinConsumtion>
+//          <PostRunCarbConsumtion>Medium</PostRunCarbConsumtion>
+//          <PostRunFatConsumtion>Medium</PostRunFatConsumtion>
+//          <PostRunProteinConsumtion>Medium</PostRunProteinConsumtion>
+//          <RunnerType>Fun run</RunnerType>
+//          <BudgetInteresets>
+//             <BudgetIntereset>301.0</BudgetIntereset>
+//             <BudgetIntereset>600.0</BudgetIntereset>
+//          </BudgetInteresets>
+//          <hasRestaurantTypeInterest>Fast_Dining_Type</hasRestaurantTypeInterest>
+//          <hasFoodTypeInterests>
+//             <hasFoodTypeInterest>ALaCarte_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Bakery_Cake_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Breakfast_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>BubbleMilkTea_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Buffet_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Burger_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>CleanFood_Salad_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Dessert_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Dimsum_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>DrinksJuice_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>FastFood_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Grill_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>GrilledPork_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>IceCream_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Noodles_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Omakase_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>OneDishMeal_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Pizza_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Ramen_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Seafood_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Shabu_Sukiyaki_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Steak_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Sushi_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>VegatarianFood_Type</hasFoodTypeInterest>
+//             <hasFoodTypeInterest>Vegatarian_Jay_Type</hasFoodTypeInterest>
+//          </hasFoodTypeInterests>
+//       </sch:getRestaurantRecommendationRequest>
+//    </soapenv:Body>
+// </soapenv:Envelope>
 @Endpoint
 public class RestaurantRecommendationEndpoint {
 
@@ -122,7 +169,7 @@ public class RestaurantRecommendationEndpoint {
         InfModel inf = ModelFactory.createInfModel(reasoner, model);
         Resource user = inf.getResource(userURI);
         Property p = inf.getProperty(NS, "hasRecommend");
-        Property c = inf.getProperty(NS, "confidence");
+        // Property c = inf.getProperty(NS, "confidence");
         StmtIterator i1 = inf.listStatements(user, p, (RDFNode) null);
 
 
@@ -134,14 +181,14 @@ public class RestaurantRecommendationEndpoint {
             if (statementObj.isResource()) {
                 Resource restaurant = statementObj.asResource();
         
-                Statement restaurantNameStmt = restaurant.getProperty(model.createProperty(NS + "RestaurantName"));
+                Statement restaurantNameStmt = restaurant.getProperty(inf.createProperty(NS + "RestaurantName"));
                 String restaurantName = "";
                 if (restaurantNameStmt != null) {
                     restaurantName = restaurantNameStmt.getString();
                 }
                 restaurantRes.setRestaurantName(restaurantName);
         
-                Property hasRestaurantNationality = model.createProperty(NS + "hasRestaurantNationality");
+                Property hasRestaurantNationality = inf.createProperty(NS + "hasRestaurantNationality");
                 Statement nationalityStmt = restaurant.getProperty(hasRestaurantNationality);
                 String restaurantNationality = "";
                 if (nationalityStmt != null && nationalityStmt.getObject().isResource()) {
@@ -149,7 +196,7 @@ public class RestaurantRecommendationEndpoint {
                 }
                 restaurantRes.setRestaurantNationality(restaurantNationality);
         
-                Property hasRestaurantType = model.createProperty(NS + "hasRestaurantType");
+                Property hasRestaurantType = inf.createProperty(NS + "hasRestaurantType");
                 Statement typeStmt = restaurant.getProperty(hasRestaurantType);
                 String restaurantType = "";
                 if (typeStmt != null && typeStmt.getObject().isResource()) {
@@ -157,19 +204,19 @@ public class RestaurantRecommendationEndpoint {
                 }
                 restaurantRes.setRestaurantType(restaurantType);
         
-                Property hasRestaurantPlace = model.createProperty(NS + "hasRestaurantPlace");
+                Property hasRestaurantPlace = inf.createProperty(NS + "hasRestaurantPlace");
                 Statement placeStmt = restaurant.getProperty(hasRestaurantPlace);
                 String district = "";
                 if (placeStmt != null && placeStmt.getObject().isResource()) {
                     Resource placeResource = placeStmt.getObject().asResource();
-                    Statement districtStmt = placeResource.getProperty(model.createProperty(NS + "District"));
+                    Statement districtStmt = placeResource.getProperty(inf.createProperty(NS + "District"));
                     if (districtStmt != null) {
                         district = districtStmt.getString();
                     }
                 }
                 restaurantRes.setDistrict(district);
         
-                Property hasFoodType = model.createProperty(NS + "hasFoodType");
+                Property hasFoodType = inf.createProperty(NS + "hasFoodType");
                 Statement foodTypeStmt = restaurant.getProperty(hasFoodType);
                 String foodType = "";
                 String fat = "";
@@ -180,17 +227,17 @@ public class RestaurantRecommendationEndpoint {
                     Resource foodTypeResource = foodTypeStmt.getObject().asResource();
                     foodType = foodTypeResource.getLocalName();
         
-                    Statement fatStmt = foodTypeResource.getProperty(model.createProperty(NS + "Fat"));
+                    Statement fatStmt = foodTypeResource.getProperty(inf.createProperty(NS + "Fat"));
                     if (fatStmt != null) {
                         fat = fatStmt.getString();
                     }
         
-                    Statement proteinStmt = foodTypeResource.getProperty(model.createProperty(NS + "Protein"));
+                    Statement proteinStmt = foodTypeResource.getProperty(inf.createProperty(NS + "Protein"));
                     if (proteinStmt != null) {
                         protein = proteinStmt.getString();
                     }
         
-                    Statement carbStmt = foodTypeResource.getProperty(model.createProperty(NS + "Carbohydrates"));
+                    Statement carbStmt = foodTypeResource.getProperty(inf.createProperty(NS + "Carbohydrates"));
                     if (carbStmt != null) {
                         carbohydrates = carbStmt.getString();
                     }
@@ -200,7 +247,7 @@ public class RestaurantRecommendationEndpoint {
                 restaurantRes.setProtein(protein);
                 restaurantRes.setCarbohydrates(carbohydrates);
         
-                Property budgetProperty = model.createProperty(NS + "Budget");
+                Property budgetProperty = inf.createProperty(NS + "Budget");
                 StmtIterator budgetIterator = restaurant.listProperties(budgetProperty);
         
                 Double minBudget = null;
@@ -225,7 +272,7 @@ public class RestaurantRecommendationEndpoint {
                 restaurantRes.setCleanMaxBudget(cleanMaxBudget);
         
                 float highestConfidence = 0;
-                StmtIterator i2 = inf.listStatements(restaurant, model.createProperty(NS + "confidence"), (RDFNode) null);
+                StmtIterator i2 = inf.listStatements(restaurant, inf.createProperty(NS + "confidence"), (RDFNode) null);
                 while (i2.hasNext()) {
                     Statement confidenceStatement = i2.nextStatement();
                     RDFNode confidence = confidenceStatement.getObject();

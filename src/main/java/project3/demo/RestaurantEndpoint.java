@@ -44,13 +44,11 @@ public class RestaurantEndpoint {
 
 			Restaurants restaurant = new Restaurants();
 
-			// Restaurant Name
 			Statement restaurantNameStmt = restaurantResource.getProperty(model.createProperty(NS + "RestaurantName"));
 			if (restaurantNameStmt != null) {
 				restaurant.setRestaurantName(restaurantNameStmt.getString());
 			}
 
-			// hasRestaurantNationality
 			Property hasRestaurantNationalityProperty = model.createProperty(NS + "hasRestaurantNationality");
 			Statement hasRestaurantNationalityStmt = restaurantResource.getProperty(hasRestaurantNationalityProperty);
 			if (hasRestaurantNationalityStmt != null) {
@@ -58,7 +56,6 @@ public class RestaurantEndpoint {
 				restaurant.setRestaurantNationality(hasRestaurantNationalityResource.getLocalName());
 			}
 
-			// hasRestaurantType
 			Property hasRestaurantTypeProperty = model.createProperty(NS + "hasRestaurantType");
 			Statement hasRestaurantTypeStmt = restaurantResource.getProperty(hasRestaurantTypeProperty);
 			if (hasRestaurantTypeStmt != null) {
@@ -66,7 +63,6 @@ public class RestaurantEndpoint {
 				restaurant.setRestaurantType(hasRestaurantTypeResource.getLocalName());
 			}
 
-			// hasRestaurantPlace (with district lookup)
 			Property hasRestaurantPlaceProperty = model.createProperty(NS + "hasRestaurantPlace");
 			Statement hasRestaurantPlaceStmt = restaurantResource.getProperty(hasRestaurantPlaceProperty);
 			if (hasRestaurantPlaceStmt != null) {
@@ -77,7 +73,6 @@ public class RestaurantEndpoint {
 				}
 			}
 
-			// hasFoodType (with fat, protein, carb lookup)
 			Property hasFoodTypeProperty = model.createProperty(NS + "hasFoodType");
 			Statement hasFoodTypeStmt = restaurantResource.getProperty(hasFoodTypeProperty);
 			if (hasFoodTypeStmt != null) {
@@ -100,7 +95,6 @@ public class RestaurantEndpoint {
 				}
 			}
 
-			// Budget handling (min/max logic)
 			Property budgetProperty = model.createProperty(NS + "Budget");
 			StmtIterator budgetIterator = restaurantResource.listProperties(budgetProperty);
 
