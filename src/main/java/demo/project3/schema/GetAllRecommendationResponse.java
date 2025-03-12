@@ -34,8 +34,8 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-@XmlRootElement(name = "getRestaurantRequest")
-public class GetRestaurantRequest {
+@XmlRootElement(name = "getAllRecommendationResponse")
+public class GetAllRecommendationResponse {
 
 
 }

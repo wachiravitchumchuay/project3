@@ -1,0 +1,15 @@
+@prefix run: <http://www.semanticweb.org/guind/ontologies/runningeventontology#> .
+[MatchDistrict:
+    (?re run:hasEventVenue ?venue)
+    (?venue run:District ?district)
+    (?travelPlace rdf:type run:TravelPlace)
+    (?travelPlace run:District ?district)
+    -> (?re run:hasTravelPlaceRecommend ?travelPlace)
+]
+
+[MatchInterest:
+    (?User run:TravelPlaceTypeInterest ?type)
+    (?travelPlace rdf:type run:TravelPlace)
+    (?travelPlace run:TravelPlaceType ?type)
+    -> (?User run:hasTravelPlaceRecommend ?travelPlace)
+]

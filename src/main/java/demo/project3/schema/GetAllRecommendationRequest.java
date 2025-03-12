@@ -27,26 +27,37 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="PostRunCarbConsumtion" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="PostRunFatConsumtion" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="PostRunProteinConsumtion" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="PreRunCarbConsumtion" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="PreRunFatConsumtion" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="PreRunProteinConsumtion" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="hasRestaurantTypeInterest" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="RunnerType" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="BudgetInteresets"&gt;
+ *         &lt;element name="district" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="raceType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="typeofEvent" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="travelPlaceType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="price" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="organization" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="activityArea" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="standard" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="level" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="startPeriod" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="reward" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="PostRunCarbConsumtion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="PostRunFatConsumtion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="PostRunProteinConsumtion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="PreRunCarbConsumtion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="PreRunFatConsumtion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="PreRunProteinConsumtion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="hasRestaurantTypeInterest" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="RunnerType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="BudgetInteresets" minOccurs="0"&gt;
  *           &lt;complexType&gt;
  *             &lt;complexContent&gt;
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *                 &lt;sequence&gt;
- *                   &lt;element name="BudgetIntereset" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="2" minOccurs="2"/&gt;
+ *                   &lt;element name="BudgetIntereset" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="2" minOccurs="0"/&gt;
  *                 &lt;/sequence&gt;
  *               &lt;/restriction&gt;
  *             &lt;/complexContent&gt;
  *           &lt;/complexType&gt;
  *         &lt;/element&gt;
- *         &lt;element name="hasFoodTypeInterests"&gt;
+ *         &lt;element name="hasFoodTypeInterests" minOccurs="0"&gt;
  *           &lt;complexType&gt;
  *             &lt;complexContent&gt;
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
@@ -67,6 +78,17 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "district",
+    "raceType",
+    "typeofEvent",
+    "travelPlaceType",
+    "price",
+    "organization",
+    "activityArea",
+    "standard",
+    "level",
+    "startPeriod",
+    "reward",
     "postRunCarbConsumtion",
     "postRunFatConsumtion",
     "postRunProteinConsumtion",
@@ -78,29 +100,302 @@ import jakarta.xml.bind.annotation.XmlType;
     "budgetInteresets",
     "hasFoodTypeInterests"
 })
-@XmlRootElement(name = "getRestaurantRecommendationRequest")
-public class GetRestaurantRecommendationRequest {
+@XmlRootElement(name = "getAllRecommendationRequest")
+public class GetAllRecommendationRequest {
 
-    @XmlElement(name = "PostRunCarbConsumtion", required = true)
+    protected String district;
+    protected String raceType;
+    protected String typeofEvent;
+    protected String travelPlaceType;
+    protected String price;
+    protected String organization;
+    protected String activityArea;
+    protected String standard;
+    protected String level;
+    protected String startPeriod;
+    protected String reward;
+    @XmlElement(name = "PostRunCarbConsumtion")
     protected String postRunCarbConsumtion;
-    @XmlElement(name = "PostRunFatConsumtion", required = true)
+    @XmlElement(name = "PostRunFatConsumtion")
     protected String postRunFatConsumtion;
-    @XmlElement(name = "PostRunProteinConsumtion", required = true)
+    @XmlElement(name = "PostRunProteinConsumtion")
     protected String postRunProteinConsumtion;
-    @XmlElement(name = "PreRunCarbConsumtion", required = true)
+    @XmlElement(name = "PreRunCarbConsumtion")
     protected String preRunCarbConsumtion;
-    @XmlElement(name = "PreRunFatConsumtion", required = true)
+    @XmlElement(name = "PreRunFatConsumtion")
     protected String preRunFatConsumtion;
-    @XmlElement(name = "PreRunProteinConsumtion", required = true)
+    @XmlElement(name = "PreRunProteinConsumtion")
     protected String preRunProteinConsumtion;
-    @XmlElement(required = true)
     protected String hasRestaurantTypeInterest;
-    @XmlElement(name = "RunnerType", required = true)
+    @XmlElement(name = "RunnerType")
     protected String runnerType;
-    @XmlElement(name = "BudgetInteresets", required = true)
-    protected GetRestaurantRecommendationRequest.BudgetInteresets budgetInteresets;
-    @XmlElement(required = true)
-    protected GetRestaurantRecommendationRequest.HasFoodTypeInterests hasFoodTypeInterests;
+    @XmlElement(name = "BudgetInteresets")
+    protected GetAllRecommendationRequest.BudgetInteresets budgetInteresets;
+    protected GetAllRecommendationRequest.HasFoodTypeInterests hasFoodTypeInterests;
+
+    /**
+     * Gets the value of the district property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDistrict() {
+        return district;
+    }
+
+    /**
+     * Sets the value of the district property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDistrict(String value) {
+        this.district = value;
+    }
+
+    /**
+     * Gets the value of the raceType property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getRaceType() {
+        return raceType;
+    }
+
+    /**
+     * Sets the value of the raceType property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRaceType(String value) {
+        this.raceType = value;
+    }
+
+    /**
+     * Gets the value of the typeofEvent property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getTypeofEvent() {
+        return typeofEvent;
+    }
+
+    /**
+     * Sets the value of the typeofEvent property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTypeofEvent(String value) {
+        this.typeofEvent = value;
+    }
+
+    /**
+     * Gets the value of the travelPlaceType property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getTravelPlaceType() {
+        return travelPlaceType;
+    }
+
+    /**
+     * Sets the value of the travelPlaceType property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTravelPlaceType(String value) {
+        this.travelPlaceType = value;
+    }
+
+    /**
+     * Gets the value of the price property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPrice() {
+        return price;
+    }
+
+    /**
+     * Sets the value of the price property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPrice(String value) {
+        this.price = value;
+    }
+
+    /**
+     * Gets the value of the organization property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getOrganization() {
+        return organization;
+    }
+
+    /**
+     * Sets the value of the organization property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setOrganization(String value) {
+        this.organization = value;
+    }
+
+    /**
+     * Gets the value of the activityArea property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getActivityArea() {
+        return activityArea;
+    }
+
+    /**
+     * Sets the value of the activityArea property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setActivityArea(String value) {
+        this.activityArea = value;
+    }
+
+    /**
+     * Gets the value of the standard property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getStandard() {
+        return standard;
+    }
+
+    /**
+     * Sets the value of the standard property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setStandard(String value) {
+        this.standard = value;
+    }
+
+    /**
+     * Gets the value of the level property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getLevel() {
+        return level;
+    }
+
+    /**
+     * Sets the value of the level property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLevel(String value) {
+        this.level = value;
+    }
+
+    /**
+     * Gets the value of the startPeriod property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getStartPeriod() {
+        return startPeriod;
+    }
+
+    /**
+     * Sets the value of the startPeriod property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setStartPeriod(String value) {
+        this.startPeriod = value;
+    }
+
+    /**
+     * Gets the value of the reward property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getReward() {
+        return reward;
+    }
+
+    /**
+     * Sets the value of the reward property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setReward(String value) {
+        this.reward = value;
+    }
 
     /**
      * Gets the value of the postRunCarbConsumtion property.
@@ -299,10 +594,10 @@ public class GetRestaurantRecommendationRequest {
      * 
      * @return
      *     possible object is
-     *     {@link GetRestaurantRecommendationRequest.BudgetInteresets }
+     *     {@link GetAllRecommendationRequest.BudgetInteresets }
      *     
      */
-    public GetRestaurantRecommendationRequest.BudgetInteresets getBudgetInteresets() {
+    public GetAllRecommendationRequest.BudgetInteresets getBudgetInteresets() {
         return budgetInteresets;
     }
 
@@ -311,10 +606,10 @@ public class GetRestaurantRecommendationRequest {
      * 
      * @param value
      *     allowed object is
-     *     {@link GetRestaurantRecommendationRequest.BudgetInteresets }
+     *     {@link GetAllRecommendationRequest.BudgetInteresets }
      *     
      */
-    public void setBudgetInteresets(GetRestaurantRecommendationRequest.BudgetInteresets value) {
+    public void setBudgetInteresets(GetAllRecommendationRequest.BudgetInteresets value) {
         this.budgetInteresets = value;
     }
 
@@ -323,10 +618,10 @@ public class GetRestaurantRecommendationRequest {
      * 
      * @return
      *     possible object is
-     *     {@link GetRestaurantRecommendationRequest.HasFoodTypeInterests }
+     *     {@link GetAllRecommendationRequest.HasFoodTypeInterests }
      *     
      */
-    public GetRestaurantRecommendationRequest.HasFoodTypeInterests getHasFoodTypeInterests() {
+    public GetAllRecommendationRequest.HasFoodTypeInterests getHasFoodTypeInterests() {
         return hasFoodTypeInterests;
     }
 
@@ -335,10 +630,10 @@ public class GetRestaurantRecommendationRequest {
      * 
      * @param value
      *     allowed object is
-     *     {@link GetRestaurantRecommendationRequest.HasFoodTypeInterests }
+     *     {@link GetAllRecommendationRequest.HasFoodTypeInterests }
      *     
      */
-    public void setHasFoodTypeInterests(GetRestaurantRecommendationRequest.HasFoodTypeInterests value) {
+    public void setHasFoodTypeInterests(GetAllRecommendationRequest.HasFoodTypeInterests value) {
         this.hasFoodTypeInterests = value;
     }
 
@@ -353,7 +648,7 @@ public class GetRestaurantRecommendationRequest {
      *   &lt;complexContent&gt;
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
      *       &lt;sequence&gt;
-     *         &lt;element name="BudgetIntereset" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="2" minOccurs="2"/&gt;
+     *         &lt;element name="BudgetIntereset" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="2" minOccurs="0"/&gt;
      *       &lt;/sequence&gt;
      *     &lt;/restriction&gt;
      *   &lt;/complexContent&gt;
@@ -368,7 +663,7 @@ public class GetRestaurantRecommendationRequest {
     })
     public static class BudgetInteresets {
 
-        @XmlElement(name = "BudgetIntereset", required = true)
+        @XmlElement(name = "BudgetIntereset")
         protected List<String> budgetIntereset;
 
         /**
