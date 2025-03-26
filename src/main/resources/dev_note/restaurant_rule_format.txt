@@ -1,8 +1,5 @@
 @prefix re: <http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#> .
 
-=================
-==== PrePost ====
-
 
 [Jena1: 
 (?Restaurant re:hasFoodType ?FoodType) 
@@ -122,13 +119,6 @@
 (?Restaurant re:confidence "90") ]
 
 
-==== PrePost ====
-=================
-
-========================
-==== RestaurantType ====
-
-
 [Jena6: 
 (?Restaurant re:hasRestaurantType ?RestaurantType) 
 (?RestaurantType re:type re:Fast_Dining_Type) 
@@ -187,12 +177,6 @@
 (?User re:hasRecommend ?Restaurant) 
 (?Restaurant re:confidence "90") ]
 
-
-==== RestaurantType ====
-========================
-
-====================
-==== RunnerType ====
 
 [Jena4: 
 (?Restaurant re:hasFoodType ?FoodType) 
@@ -308,12 +292,6 @@
 (?Restaurant re:confidence "90") ]
 
 
-==== RunnerType ====
-====================
-
-==================================
-==== RunnerType RestaurantType====
-
 [Jena17: 
 (?Restaurant re:hasRestaurantType ?RestaurantType) 
 (?RestaurantType re:type re:Fast_Dining_Type) 
@@ -327,9 +305,3 @@
 -> 
 (?User re:hasRecommend ?Restaurant) 
 (?Restaurant re:confidence "92") ]
-
-
-==== RunnerType RestaurantType====
-==================================
-
-
