@@ -39,20 +39,16 @@ public class WebServiceConfig {
         wsdl11Definition.setSchema(schema);
         return wsdl11Definition;
     }
-
-    /**
-     * CORS Filter to allow frontend (localhost:5173) to access SOAP endpoints under /ws/**
-     */
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:5173")); // Add your frontend URL here
+        config.setAllowedOrigins(Arrays.asList("http://localhost:5173")); // frontend URL
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(Arrays.asList("*"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/ws/**", config); // Apply only to /ws endpoints
+        source.registerCorsConfiguration("/ws/**", config);
 
         return new CorsFilter(source);
     }

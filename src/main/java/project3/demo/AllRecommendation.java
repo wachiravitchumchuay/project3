@@ -57,7 +57,7 @@ public class AllRecommendation {
         OntProperty PreRunFatConsumtion = model.getDatatypeProperty(RESTAURANT_NS + "PreRunFatConsumtion");
         OntProperty PreRunProteinConsumtion = model.getDatatypeProperty(RESTAURANT_NS + "PreRunProteinConsumtion");
 
-        OntProperty RunnerType = model.getDatatypeProperty(RESTAURANT_NS + "RunnerType");
+        OntProperty RunnerType = model.getDatatypeProperty(RESTAURANT_NS + "RunnerType"); 
 
         OntProperty BudgetIntereset = model.getDatatypeProperty(RESTAURANT_NS + "BudgetInterest");
 
