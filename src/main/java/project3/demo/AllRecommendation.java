@@ -135,7 +135,8 @@ public class AllRecommendation {
         Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(configuration);
         InfModel inf = ModelFactory.createInfModel(reasoner, model);
         System.out.println("3");
-        try (FileOutputStream out = new FileOutputStream("testInf.rdf")) {
+        
+        try (FileOutputStream out = new FileOutputStream("allRec.rdf")) {
             inf.write(out, "RDF/XML");
             System.out.println("Save");
         } catch (Exception e) {
