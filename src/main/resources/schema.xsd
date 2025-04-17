@@ -1,4 +1,5 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://project3.demo/schema" xmlns="http://project3.demo/schema">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://project3.demo/schema"
+	xmlns="http://project3.demo/schema">
 
 	<xs:element name="getRestaurantRequest">
 		<xs:complexType>
@@ -27,7 +28,7 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="getRestaurantRecommendationRequest">
 		<xs:complexType>
 			<xs:sequence>
@@ -79,7 +80,7 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="getAllRecommendationRequest">
 		<xs:complexType>
 			<xs:sequence>
@@ -121,7 +122,85 @@
 	</xs:element>
 	<xs:element name="getAllRecommendationResponse">
 		<xs:complexType>
-			<xs:sequence/>
+			<xs:sequence>
+				<xs:element name="restaurants" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="confidence" type="xs:string"/>
+							<xs:element name="carbohydrates" type="xs:string"/>
+							<xs:element name="restaurant_nationality" type="xs:string"/>
+							<xs:element name="district" type="xs:string"/>
+							<xs:element name="protein" type="xs:string"/>
+							<xs:element name="fat" type="xs:string"/>
+							<xs:element name="restaurant_type" type="xs:string"/>
+							<xs:element name="food_type" type="xs:string"/>
+							<xs:element name="clean_max_budget" type="xs:string"/>
+							<xs:element name="clean_min_budget" type="xs:string"/>
+							<xs:element name="restaurant_name" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="runningEvents" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="runningEventName" type="xs:string"/>
+							<xs:element name="confidence" type="xs:string" minOccurs="0"/>
+							<xs:element name="district" type="xs:string"/>
+							<xs:element name="raceTypes">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="raceType" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="typeofEvent" type="xs:string"/>
+							<xs:element name="prices">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="price" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="organization" type="xs:string"/>
+							<xs:element name="activityArea" type="xs:string"/>
+							<xs:element name="standard" type="xs:string"/>
+							<xs:element name="level" type="xs:string"/>
+							<xs:element name="startPeriod" type="xs:string"/>
+							<xs:element name="rewards">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="reward" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="travelPlaces" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="travelPlaceName" type="xs:string" minOccurs="0"/>
+										<xs:element name="travelPlaceType" type="xs:string" minOccurs="0"/>
+										<xs:element name="district" type="xs:string" minOccurs="0"/>
+										<xs:element name="longitude" type="xs:string" minOccurs="0"/>
+										<xs:element name="latitude" type="xs:string" minOccurs="0"/>
+										<xs:element name="hotScore" type="xs:string" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="travelPlaces" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="travelPlaceName" type="xs:string" minOccurs="0"/>
+							<xs:element name="travelPlaceType" type="xs:string" minOccurs="0"/>
+							<xs:element name="district" type="xs:string" minOccurs="0"/>
+							<xs:element name="longitude" type="xs:string" minOccurs="0"/>
+							<xs:element name="latitude" type="xs:string" minOccurs="0"/>
+							<xs:element name="hotScore" type="xs:string" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

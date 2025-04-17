@@ -11,7 +11,11 @@ import org.apache.jena.rdf.model.InfModel;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.reasoner.rulesys.GenericRuleReasonerFactory;
 import org.apache.jena.vocabulary.RDF;
@@ -23,6 +27,9 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import demo.project3.schema.GetAllRecommendationRequest;
 import demo.project3.schema.GetAllRecommendationResponse;
+import demo.project3.schema.GetAllRecommendationResponse.Restaurants;
+import demo.project3.schema.GetAllRecommendationResponse.RunningEvents;
+import demo.project3.schema.GetAllRecommendationResponse.TravelPlaces;
 
 @Endpoint
 public class AllRecommendation {
@@ -43,7 +50,7 @@ public class AllRecommendation {
     @ResponsePayload
     public GetAllRecommendationResponse test(@RequestPayload GetAllRecommendationRequest request) {
         GetAllRecommendationResponse response = new GetAllRecommendationResponse();
-        System.out.println("Begin");
+        System.out.println("Begin getAllRecommendationRequest");
 
         OntModel model = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM);
         model.read(RESTAURANT_ONTOLOGY_FILE);
@@ -93,7 +100,6 @@ public class AllRecommendation {
         userInstance.addProperty(PreRunProteinConsumtion, request.getPreRunProteinConsumtion());
 
         userInstance.addProperty(RunnerType, request.getRunnerType());
-
         for (String budget : request.getBudgetInteresets().getBudgetIntereset()) {
             float budgetFloat = Float.parseFloat(budget);
             Literal budgetLiteral = model.createTypedLiteral(budgetFloat);
@@ -101,12 +107,10 @@ public class AllRecommendation {
         }
         Individual restaurantInterest = model.getIndividual(RESTAURANT_NS + request.getHasRestaurantTypeInterest());
         userInstance.addProperty(hasRestaurantTypeInterest, restaurantInterest);
-
         for (String foodType : request.getHasFoodTypeInterests().getHasFoodTypeInterest()) {
             Individual foodTypeInterest = model.getIndividual(RESTAURANT_NS + foodType);
             userInstance.addProperty(hasFoodTypeInterest, foodTypeInterest);
         }
-
         userInstance.addProperty(PlaceType, request.getTravelPlaceType());
         userInstance.addProperty(Location, request.getDistrict());
         userInstance.addProperty(TypeOfEvent, request.getTypeofEvent());
@@ -120,12 +124,11 @@ public class AllRecommendation {
         Individual organizationInstance = model.getIndividual(RUNNING_NS + request.getOrganization());
         userInstance.addProperty(hasOrganization, organizationInstance); // 
 
-        System.out.println("1.1");
+
         Individual raceTypeInstance = model.getIndividual(RUNNING_NS + request.getRaceType());
-        System.out.println("1.2");
+
         userInstance.addProperty(hasRacetype, raceTypeInstance);
         
-        System.out.println("2");
         Model rm = ModelFactory.createDefaultModel();
         Resource configuration = rm.createResource();
         configuration.addProperty(ReasonerVocabulary.PROPruleMode, "hybrid");
@@ -134,13 +137,193 @@ public class AllRecommendation {
         configuration.addProperty(ReasonerVocabulary.PROPruleSet, RESTAURANT_RULES_FILE);
         Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(configuration);
         InfModel inf = ModelFactory.createInfModel(reasoner, model);
-        System.out.println("3");
+
+        Resource user = inf.getResource(userURI);
+        Property p = inf.getProperty(RESTAURANT_NS, "hasRecommend");
+        StmtIterator i1 = inf.listStatements(user, p, (RDFNode) null);
+
+        Property p2 = inf.getProperty(RUNNING_NS, "hasRecommend");
+        StmtIterator i3 = inf.listStatements(user, p2, (RDFNode) null);
+
+        Property p3 = inf.getProperty(RUNNING_NS, "hasTravelPlaceRecommend");
+        StmtIterator i5 = inf.listStatements(user, p3, (RDFNode) null);
+
+        while (i1.hasNext()) {
+            
+            Statement statement = i1.nextStatement();
+            RDFNode statementObj = statement.getObject();
+            Restaurants restaurantRes = new Restaurants();
+            if (statementObj.isResource()) {
+                Resource restaurant = statementObj.asResource();
         
+                Statement restaurantNameStmt = restaurant.getProperty(inf.createProperty(RESTAURANT_NS + "RestaurantName"));
+                String restaurantName = "";
+                if (restaurantNameStmt != null) {
+                    restaurantName = restaurantNameStmt.getString();
+                }
+                restaurantRes.setRestaurantName(restaurantName);
+        
+                Property hasRestaurantNationality = inf.createProperty(RESTAURANT_NS + "hasRestaurantNationality");
+                Statement nationalityStmt = restaurant.getProperty(hasRestaurantNationality);
+                String restaurantNationality = "";
+                if (nationalityStmt != null && nationalityStmt.getObject().isResource()) {
+                    restaurantNationality = nationalityStmt.getObject().asResource().getLocalName();
+                }
+                restaurantRes.setRestaurantNationality(restaurantNationality);
+        
+                Property hasRestaurantType = inf.createProperty(RESTAURANT_NS + "hasRestaurantType");
+                Statement typeStmt = restaurant.getProperty(hasRestaurantType);
+                String restaurantType = "";
+                if (typeStmt != null && typeStmt.getObject().isResource()) {
+                    restaurantType = typeStmt.getObject().asResource().getLocalName();
+                }
+                restaurantRes.setRestaurantType(restaurantType);
+        
+                Property hasRestaurantPlace = inf.createProperty(RESTAURANT_NS + "hasRestaurantPlace");
+                Statement placeStmt = restaurant.getProperty(hasRestaurantPlace);
+                String district = "";
+                if (placeStmt != null && placeStmt.getObject().isResource()) {
+                    Resource placeResource = placeStmt.getObject().asResource();
+                    Statement districtStmt = placeResource.getProperty(inf.createProperty(RESTAURANT_NS + "District"));
+                    if (districtStmt != null) {
+                        district = districtStmt.getString();
+                    }
+                }
+                restaurantRes.setDistrict(district);
+        
+                Property hasFoodType = inf.createProperty(RESTAURANT_NS + "hasFoodType");
+                Statement foodTypeStmt = restaurant.getProperty(hasFoodType);
+                String foodType = "";
+                String fat = "";
+                String protein = "";
+                String carbohydrates = "";
+        
+                if (foodTypeStmt != null && foodTypeStmt.getObject().isResource()) {
+                    Resource foodTypeResource = foodTypeStmt.getObject().asResource();
+                    foodType = foodTypeResource.getLocalName();
+        
+                    Statement fatStmt = foodTypeResource.getProperty(inf.createProperty(RESTAURANT_NS + "Fat"));
+                    if (fatStmt != null) {
+                        fat = fatStmt.getString();
+                    }
+        
+                    Statement proteinStmt = foodTypeResource.getProperty(inf.createProperty(RESTAURANT_NS + "Protein"));
+                    if (proteinStmt != null) {
+                        protein = proteinStmt.getString();
+                    }
+        
+                    Statement carbStmt = foodTypeResource.getProperty(inf.createProperty(RESTAURANT_NS + "Carbohydrates"));
+                    if (carbStmt != null) {
+                        carbohydrates = carbStmt.getString();
+                    }
+                }
+                restaurantRes.setFoodType(foodType);
+                restaurantRes.setFat(fat);
+                restaurantRes.setProtein(protein);
+                restaurantRes.setCarbohydrates(carbohydrates);
+        
+                Property budgetProperty = inf.createProperty(RESTAURANT_NS + "Budget");
+                StmtIterator budgetIterator = restaurant.listProperties(budgetProperty);
+        
+                Double minBudget = null;
+                Double maxBudget = null;
+        
+                while (budgetIterator.hasNext()) {
+                    Statement budgetStmt = budgetIterator.nextStatement();
+                    double budgetValue = Double.parseDouble(budgetStmt.getObject().asLiteral().getString());
+        
+                    if (minBudget == null || budgetValue < minBudget) {
+                        minBudget = budgetValue;
+                    }
+                    if (maxBudget == null || budgetValue > maxBudget) {
+                        maxBudget = budgetValue;
+                    }
+                }
+        
+                String cleanMinBudget = minBudget != null ? minBudget.toString() : "";
+                String cleanMaxBudget = maxBudget != null ? maxBudget.toString() : "";
+        
+                restaurantRes.setCleanMinBudget(cleanMinBudget);
+                restaurantRes.setCleanMaxBudget(cleanMaxBudget);
+        
+                float highestConfidence = 0;
+                StmtIterator i2 = inf.listStatements(restaurant, inf.createProperty(RESTAURANT_NS + "confidence"), (RDFNode) null);
+                while (i2.hasNext()) {
+                    Statement confidenceStatement = i2.nextStatement();
+                    RDFNode confidence = confidenceStatement.getObject();
+                    float confidenceValue = confidence.asLiteral().getFloat();
+                    if (confidenceValue > highestConfidence) {
+                        highestConfidence = confidenceValue;
+                    }
+                }
+                restaurantRes.setConfidence(String.valueOf(highestConfidence));
+                response.getRestaurants().add(restaurantRes);
+            }
+            
+        }
+
+        while (i3.hasNext()) {
+            
+            Statement statement = i3.nextStatement();
+            RDFNode statementObj = statement.getObject();
+            RunningEvents runningEventRes = new RunningEvents();
+            if (statementObj.isResource()) {
+                Resource runningEvent = statementObj.asResource();
+        
+                Statement runningEventNameStmt = runningEvent.getProperty(inf.createProperty(RUNNING_NS + "RunningEventName"));
+                String runningEventName = "";
+                if (runningEventNameStmt != null) {
+                    runningEventName = runningEventNameStmt.getString();
+                }
+                runningEventRes.setRunningEventName(runningEventName);
+        
+                float highestConfidence = 0;
+                StmtIterator i4 = inf.listStatements(runningEvent, inf.createProperty(RUNNING_NS + "confidence"), (RDFNode) null);
+                while (i4.hasNext()) {
+                    Statement confidenceStatement = i4.nextStatement();
+                    RDFNode confidence = confidenceStatement.getObject();
+                    float confidenceValue = confidence.asLiteral().getFloat();
+                    if (confidenceValue > highestConfidence) {
+                        highestConfidence = confidenceValue;
+                    }
+                }
+                runningEventRes.setConfidence(String.valueOf(highestConfidence));
+                response.getRunningEvents().add(runningEventRes);
+            }
+            
+        }
+
+        while (i5.hasNext()) {
+            
+            Statement statement = i5.nextStatement();
+            RDFNode statementObj = statement.getObject();
+            TravelPlaces travelPlaceRes = new TravelPlaces();
+            if (statementObj.isResource()) {
+                Resource travelPlace = statementObj.asResource();
+        
+                Statement travelPlaceNameStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "TravelPlaceName"));
+                String travelPlaceName = "";
+                if (travelPlaceNameStmt != null) {
+                    travelPlaceName = travelPlaceNameStmt.getString();
+                }
+                travelPlaceRes.setTravelPlaceName(travelPlaceName);
+
+                response.getTravelPlaces().add(travelPlaceRes);
+            }
+            
+        }
+
+
+
+
+
+        
+
         try (FileOutputStream out = new FileOutputStream("allRec.rdf")) {
             inf.write(out, "RDF/XML");
             System.out.println("Save");
         } catch (Exception e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
 
         System.out.println("End");

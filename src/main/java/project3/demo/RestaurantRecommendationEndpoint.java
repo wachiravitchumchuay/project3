@@ -291,7 +291,7 @@ public class RestaurantRecommendationEndpoint {
         try (FileOutputStream out = new FileOutputStream("getRec.rdf")) {
             inf.write(out, "RDF/XML");
         } catch (Exception e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
 
         return response;
