@@ -1,6 +1,7 @@
 package project3.demo;
 
 import java.io.FileOutputStream;
+import java.util.Arrays;
 
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
@@ -271,17 +272,72 @@ public class RestaurantRecommendationEndpoint {
                 restaurantRes.setCleanMinBudget(cleanMinBudget);
                 restaurantRes.setCleanMaxBudget(cleanMaxBudget);
         
-                float highestConfidence = 0;
+                // float highestConfidence = 0;
+                // StmtIterator i2 = inf.listStatements(restaurant, inf.createProperty(NS + "confidence"), (RDFNode) null);
+                // while (i2.hasNext()) {
+                //     Statement confidenceStatement = i2.nextStatement();
+                //     RDFNode confidence = confidenceStatement.getObject();
+                //     float confidenceValue = confidence.asLiteral().getFloat();
+                //     if (confidenceValue > highestConfidence) {
+                //         highestConfidence = confidenceValue;
+                //     }
+                // }
+                // restaurantRes.setConfidence(String.valueOf(highestConfidence));
+
+                int[] rulePriorities = new int[24];
+                Arrays.fill(rulePriorities, Integer.MAX_VALUE);
+                // rule No         = priority level 1 is the highest 
+                //rulePriorities[0] start from 1
+                rulePriorities[1]  = 4; // FoodType
+                rulePriorities[2]  = 4;
+                rulePriorities[3]  = 4;
+                rulePriorities[4]  = 3; // RunnerType 
+                rulePriorities[5]  = 3;
+                rulePriorities[6]  = 2; // hasRestaurantTypeInterest
+                rulePriorities[7]  = 3;
+                rulePriorities[8]  = 2;
+                rulePriorities[9]  = 4;
+                rulePriorities[10] = 3;
+                rulePriorities[11] = 4;
+                rulePriorities[12] = 3;
+                rulePriorities[13] = 2;
+                rulePriorities[14] = 4;
+                rulePriorities[15] = 3;
+                rulePriorities[16] = 4;
+                rulePriorities[17] = 1; // hasRestaurantTypeInterest + RunnerType 
+                rulePriorities[18] = 3;
+                rulePriorities[19] = 3;
+                rulePriorities[20] = 4;
+                rulePriorities[21] = 2;
+                rulePriorities[22] = 4;
+                rulePriorities[23] = 3;
+
+                int bestConfidence = 0;
+                int bestPriority = Integer.MAX_VALUE;
+
                 StmtIterator i2 = inf.listStatements(restaurant, inf.createProperty(NS + "confidence"), (RDFNode) null);
                 while (i2.hasNext()) {
                     Statement confidenceStatement = i2.nextStatement();
                     RDFNode confidence = confidenceStatement.getObject();
-                    float confidenceValue = confidence.asLiteral().getFloat();
-                    if (confidenceValue > highestConfidence) {
-                        highestConfidence = confidenceValue;
+                    String rawConfidence = confidence.asLiteral().getString();
+
+                    if (rawConfidence.contains(".")) {
+                        String[] parts = rawConfidence.split("\\.");
+                            int confVal = Integer.parseInt(parts[0]);
+                            int ruleId = Integer.parseInt(parts[1]);
+
+                            int priority = (ruleId < rulePriorities.length) ? rulePriorities[ruleId] : Integer.MAX_VALUE;
+
+                            if (priority < bestPriority || (priority == bestPriority && confVal > bestConfidence)) {
+                                bestPriority = priority;
+                                bestConfidence = confVal;
+                            }
+
                     }
                 }
-                restaurantRes.setConfidence(String.valueOf(highestConfidence));
+                restaurantRes.setConfidence(String.valueOf(bestConfidence));
+
+
                 response.getRestaurants().add(restaurantRes);
             }
             
