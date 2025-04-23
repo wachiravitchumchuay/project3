@@ -31,6 +31,8 @@ import demo.project3.schema.GetAllRecommendationResponse.Restaurants;
 import demo.project3.schema.GetAllRecommendationResponse.RunningEvents;
 import demo.project3.schema.GetAllRecommendationResponse.TravelPlaces;
 
+
+
 @Endpoint
 public class AllRecommendation {
 
@@ -147,7 +149,7 @@ public class AllRecommendation {
 
         Property p3 = inf.getProperty(RUNNING_NS, "hasTravelPlaceRecommend");
         StmtIterator i5 = inf.listStatements(user, p3, (RDFNode) null);
-
+        //RESTAURANT
         while (i1.hasNext()) {
             
             Statement statement = i1.nextStatement();
@@ -261,7 +263,7 @@ public class AllRecommendation {
             }
             
         }
-
+        //RUNNING
         while (i3.hasNext()) {
             
             Statement statement = i3.nextStatement();
@@ -277,6 +279,63 @@ public class AllRecommendation {
                 }
                 runningEventRes.setRunningEventName(runningEventName);
         
+                Statement venueStmt = runningEvent.getProperty(inf.createProperty(RUNNING_NS + "hasEventVenue"));
+                String district = "";
+                if (venueStmt != null) {
+                    Resource venue = venueStmt.getResource();
+                    Statement districtStmt = venue.getProperty(inf.createProperty(RUNNING_NS + "District"));
+                    if (districtStmt != null) {
+                        district = districtStmt.getString();
+                    }
+                }
+                runningEventRes.setDistrict(district);
+
+                Statement organizationStmt = runningEvent.getProperty(inf.createProperty(RUNNING_NS + "isOrganizedBy"));
+                String organizationName = "";
+                if (organizationStmt != null) {
+                    Resource organization = organizationStmt.getResource();
+                    Statement nameStmt = organization.getProperty(inf.createProperty(RUNNING_NS + "OrganizationName"));
+                    if (nameStmt != null) {
+                        organizationName = nameStmt.getString();
+                    }
+                }
+                runningEventRes.setOrganization(organizationName);
+
+                Statement typeofEventStmt = runningEvent.getProperty(inf.createProperty(RUNNING_NS + "TypeOfEvent"));
+                String typeofEvent = "";
+                if (typeofEventStmt != null) {
+                    typeofEvent = typeofEventStmt.getString();
+                }
+                runningEventRes.setTypeofEvent(typeofEvent);
+
+                Statement activityAreaStmt = runningEvent.getProperty(inf.createProperty(RUNNING_NS + "ActivityArea"));
+                String activityArea = "";
+                if (activityAreaStmt != null) {
+                    activityArea = activityAreaStmt.getString();
+                }
+                runningEventRes.setActivityArea(activityArea);
+
+                Statement levelOfEventStmt = runningEvent.getProperty(inf.createProperty(RUNNING_NS + "LevelOfEvent"));
+                String evelOfEvent = "";
+                if (levelOfEventStmt != null) {
+                    evelOfEvent = levelOfEventStmt.getString();
+                }
+                runningEventRes.setLevel(evelOfEvent);
+
+                Statement standardOfEventStmt = runningEvent.getProperty(inf.createProperty(RUNNING_NS + "StandardOfEvent"));
+                String standardOfEvent = "";
+                if (standardOfEventStmt != null) {
+                    standardOfEvent = standardOfEventStmt.getString();
+                }
+                runningEventRes.setStandard(standardOfEvent);
+
+                Statement startPeriodStmt = runningEvent.getProperty(inf.createProperty(RUNNING_NS + "StartPeriod"));
+                String startPeriod = "";
+                if (startPeriodStmt != null) {
+                    startPeriod = startPeriodStmt.getString();
+                }
+                runningEventRes.setStartPeriod(startPeriod);
+
                 float highestConfidence = 0;
                 StmtIterator i4 = inf.listStatements(runningEvent, inf.createProperty(RUNNING_NS + "confidence"), (RDFNode) null);
                 while (i4.hasNext()) {
@@ -288,11 +347,103 @@ public class AllRecommendation {
                     }
                 }
                 runningEventRes.setConfidence(String.valueOf(highestConfidence));
+                
+                StmtIterator raceTypeStmts = inf.listStatements(runningEvent, inf.createProperty(RUNNING_NS + "hasRaceType"), (RDFNode) null);
+                RunningEvents.RaceTypes raceTypes = new RunningEvents.RaceTypes();
+                RunningEvents.Prices prices = new RunningEvents.Prices();
+                RunningEvents.Rewards rewards = new RunningEvents.Rewards();
+                
+                while (raceTypeStmts.hasNext()) {
+                    Statement stmt = raceTypeStmts.nextStatement();
+                    Resource raceTypeRes = stmt.getResource();
+                
+                    Statement nameStmt = raceTypeRes.getProperty(inf.createProperty(RUNNING_NS + "RaceTypeName"));
+                    if (nameStmt != null) {
+                        String raceTypeName = nameStmt.getString();
+                        if (!raceTypes.getRaceType().contains(raceTypeName)) {
+                            raceTypes.getRaceType().add(raceTypeName);
+                        }
+                    }
+                
+                    Statement priceStmt = raceTypeRes.getProperty(inf.createProperty(RUNNING_NS + "Price"));
+                    if (priceStmt != null) {
+                        String price = priceStmt.getString();
+                        if (!prices.getPrice().contains(price)) {
+                            prices.getPrice().add(price);
+                        }
+                    }
+                
+                    Statement rewardStmt = raceTypeRes.getProperty(inf.createProperty(RUNNING_NS + "Reward"));
+                    if (rewardStmt != null) {
+                        String reward = rewardStmt.getString();
+                        if (!rewards.getReward().contains(reward)) {
+                            rewards.getReward().add(reward);
+                        }
+                    }
+                }
+                runningEventRes.setRaceTypes(raceTypes);
+                runningEventRes.setPrices(prices);
+                runningEventRes.setRewards(rewards);
+                
+                StmtIterator travelPlaceStmts = inf.listStatements(runningEvent, inf.createProperty(RUNNING_NS + "hasTravelPlaceRecommend"), (RDFNode) null);
+                while (travelPlaceStmts.hasNext()) {
+                    Statement statement2 = travelPlaceStmts.nextStatement();
+                    RDFNode statementObj2 = statement2.getObject();
+                    RunningEvents.TravelPlacesRunning travelPlaceRes = new RunningEvents.TravelPlacesRunning();
+                
+                    if (statementObj2.isResource()) {
+                        Resource travelPlace = statementObj2.asResource();
+                
+                        Statement travelPlaceNameStmt2 = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "TravelPlaceName"));
+                        String travelPlaceName = "";
+                        if (travelPlaceNameStmt2 != null) {
+                            travelPlaceName = travelPlaceNameStmt2.getString();
+                        }
+                        travelPlaceRes.setTravelPlaceName(travelPlaceName);
+
+                        Statement travelPlaceTypeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "TravelPlaceType"));
+                        String travelPlaceType = "";
+                        if (travelPlaceTypeStmt != null) {
+                            travelPlaceType = travelPlaceTypeStmt.getString();
+                        }
+                        travelPlaceRes.setTravelPlaceType(travelPlaceType);
+                
+                        Statement districtStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "District"));
+                        String district2 = "";
+                        if (districtStmt != null) {
+                            district2 = districtStmt.getString();
+                        }
+                        travelPlaceRes.setDistrict(district2);
+                
+                        Statement longitudeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "Longitude"));
+                        String longitude = "";
+                        if (longitudeStmt != null) {
+                            longitude = longitudeStmt.getString();
+                        }
+                        travelPlaceRes.setLongitude(longitude);
+        
+                        Statement latitudeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "Latitude"));
+                        String latitude = "";
+                        if (latitudeStmt != null) {
+                            latitude = latitudeStmt.getString();
+                        }
+                        travelPlaceRes.setLatitude(latitude);
+        
+                        Statement hotScoreStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "HotScore"));
+                        String hotScore = "";
+                        if (hotScoreStmt != null) {
+                            hotScore = hotScoreStmt.getString();
+                        }
+                        travelPlaceRes.setHotScore(hotScore);
+                
+                        runningEventRes.getTravelPlacesRunning().add(travelPlaceRes);
+                    }
+                }
                 response.getRunningEvents().add(runningEventRes);
             }
             
         }
-
+        //TRAVEL
         while (i5.hasNext()) {
             
             Statement statement = i5.nextStatement();
@@ -308,16 +459,45 @@ public class AllRecommendation {
                 }
                 travelPlaceRes.setTravelPlaceName(travelPlaceName);
 
+                Statement travelPlaceTypeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "TravelPlaceType"));
+                String travelPlaceType = "";
+                if (travelPlaceTypeStmt != null) {
+                    travelPlaceType = travelPlaceTypeStmt.getString();
+                }
+                travelPlaceRes.setTravelPlaceType(travelPlaceType);
+
+                Statement districtStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "District"));
+                String district = "";
+                if (districtStmt != null) {
+                    district = districtStmt.getString();
+                }
+                travelPlaceRes.setDistrict(district);
+
+                Statement longitudeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "Longitude"));
+                String longitude = "";
+                if (longitudeStmt != null) {
+                    longitude = longitudeStmt.getString();
+                }
+                travelPlaceRes.setLongitude(longitude);
+
+                Statement latitudeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "Latitude"));
+                String latitude = "";
+                if (latitudeStmt != null) {
+                    latitude = latitudeStmt.getString();
+                }
+                travelPlaceRes.setLatitude(latitude);
+
+                Statement hotScoreStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "HotScore"));
+                String hotScore = "";
+                if (hotScoreStmt != null) {
+                    hotScore = hotScoreStmt.getString();
+                }
+                travelPlaceRes.setHotScore(hotScore);
+
                 response.getTravelPlaces().add(travelPlaceRes);
             }
             
         }
-
-
-
-
-
-        
 
         try (FileOutputStream out = new FileOutputStream("allRec.rdf")) {
             inf.write(out, "RDF/XML");

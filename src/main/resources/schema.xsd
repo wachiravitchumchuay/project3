@@ -173,7 +173,7 @@
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="travelPlaces" minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="travelPlacesRunning" minOccurs="0" maxOccurs="unbounded">
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="travelPlaceName" type="xs:string" minOccurs="0"/>
