@@ -43,7 +43,7 @@ public class WebServiceConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:5173")); // frontend URL
+        config.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:5174")); // frontend URL
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(Arrays.asList("*"));
 

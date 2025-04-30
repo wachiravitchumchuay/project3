@@ -161,11 +161,23 @@
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
+							<xs:element name="startPeriods">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="startPeriod" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="activityAreas">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="activityArea" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
 							<xs:element name="organization" type="xs:string"/>
-							<xs:element name="activityArea" type="xs:string"/>
 							<xs:element name="standard" type="xs:string"/>
 							<xs:element name="level" type="xs:string"/>
-							<xs:element name="startPeriod" type="xs:string"/>
 							<xs:element name="rewards">
 								<xs:complexType>
 									<xs:sequence>

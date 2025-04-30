@@ -5423,7 +5423,7 @@
         <Province>Phuket</Province>
         <SubDistrict>Wichit</SubDistrict>
         <TravelPlaceName>Central Festival Phuket</TravelPlaceName>
-        <TravelPlaceType>ShoppingMall</TravelPlaceType>
+        <TravelPlaceType>ShoppingAndDining</TravelPlaceType>
     </owl:NamedIndividual>
     
 
@@ -5459,7 +5459,7 @@
         <Province>Phuket</Province>
         <SubDistrict>Wichit</SubDistrict>
         <TravelPlaceName>Central Floresta Phuket</TravelPlaceName>
-        <TravelPlaceType>ShoppingMall</TravelPlaceType>
+        <TravelPlaceType>ShoppingAndDining</TravelPlaceType>
     </owl:NamedIndividual>
     
 
@@ -6933,7 +6933,7 @@
         <Province>Phuket</Province>
         <SubDistrict>Talat Yai</SubDistrict>
         <TravelPlaceName>Golden Dragon Monument</TravelPlaceName>
-        <TravelPlaceType>Point of Interest</TravelPlaceType>
+        <TravelPlaceType>Cultural</TravelPlaceType>
     </owl:NamedIndividual>
     
 
@@ -8205,7 +8205,6 @@
         <TravelPlaceName>Kathu Waterfall</TravelPlaceName>
         <TravelPlaceName>KathuWaterfall</TravelPlaceName>
         <TravelPlaceType>Natural</TravelPlaceType>
-        <TravelPlaceType>Nature and Park</TravelPlaceType>
     </owl:NamedIndividual>
     
 
@@ -9681,7 +9680,7 @@
         <OpenTime rdf:datatype="http://www.w3.org/2001/XMLSchema#time">10:30:00</OpenTime>
         <Province>Phuket</Province>
         <SubDistrict>Talat Yai</SubDistrict>
-        <TravelPlaceType>ShoppingMall</TravelPlaceType>
+        <TravelPlaceType>ShoppingAndDining</TravelPlaceType>
         <VenueName>Lime Light Avenue</VenueName>
     </owl:NamedIndividual>
     
@@ -12726,7 +12725,7 @@
         <Province>Phuket</Province>
         <SubDistrict>Talat Yai</SubDistrict>
         <TravelPlaceName>Phuket Indy Market</TravelPlaceName>
-        <TravelPlaceType>StreetMarket</TravelPlaceType>
+        <TravelPlaceType>shoppingAndDiningTags</TravelPlaceType>
     </owl:NamedIndividual>
     
 
@@ -13328,7 +13327,7 @@
         <Province>Phuket</Province>
         <SubDistrict>Talat Yai</SubDistrict>
         <TravelPlaceName>Phuket Walking Street Market</TravelPlaceName>
-        <TravelPlaceType>StreetMarket</TravelPlaceType>
+        <TravelPlaceType>shoppingAndDiningTags</TravelPlaceType>
     </owl:NamedIndividual>
     
 
@@ -15444,7 +15443,6 @@
         <TravelPlaceName>Saphan Hin Park</TravelPlaceName>
         <TravelPlaceName>SaphanHinPark</TravelPlaceName>
         <TravelPlaceType>Natural</TravelPlaceType>
-        <TravelPlaceType>Nature and Park</TravelPlaceType>
     </owl:NamedIndividual>
     
 

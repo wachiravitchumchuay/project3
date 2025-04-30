@@ -271,15 +271,15 @@ public class AllRecommendation {
                 rulePriorities[4]  = 3; // RunnerType 
                 rulePriorities[5]  = 3;
                 rulePriorities[6]  = 2; // hasRestaurantTypeInterest
-                rulePriorities[7]  = 3;
+                rulePriorities[7]  = 3; 
                 rulePriorities[8]  = 2;
                 rulePriorities[9]  = 4;
                 rulePriorities[10] = 3;
                 rulePriorities[11] = 4;
-                rulePriorities[12] = 3;
+                rulePriorities[12] = 3;  
                 rulePriorities[13] = 2;
                 rulePriorities[14] = 4;
-                rulePriorities[15] = 3;
+                rulePriorities[15] = 3; 
                 rulePriorities[16] = 4;
                 rulePriorities[17] = 1; // hasRestaurantTypeInterest + RunnerType 
                 rulePriorities[18] = 3;
@@ -287,7 +287,7 @@ public class AllRecommendation {
                 rulePriorities[20] = 4;
                 rulePriorities[21] = 2;
                 rulePriorities[22] = 4;
-                rulePriorities[23] = 3;
+                rulePriorities[23] = 3; 
 
                 int bestConfidence = 0;
                 int bestPriority = Integer.MAX_VALUE;
@@ -363,13 +363,6 @@ public class AllRecommendation {
                 }
                 runningEventRes.setTypeofEvent(typeofEvent);
 
-                Statement activityAreaStmt = runningEvent.getProperty(inf.createProperty(RUNNING_NS + "ActivityArea"));
-                String activityArea = "";
-                if (activityAreaStmt != null) {
-                    activityArea = activityAreaStmt.getString();
-                }
-                runningEventRes.setActivityArea(activityArea);
-
                 Statement levelOfEventStmt = runningEvent.getProperty(inf.createProperty(RUNNING_NS + "LevelOfEvent"));
                 String evelOfEvent = "";
                 if (levelOfEventStmt != null) {
@@ -384,12 +377,6 @@ public class AllRecommendation {
                 }
                 runningEventRes.setStandard(standardOfEvent);
 
-                Statement startPeriodStmt = runningEvent.getProperty(inf.createProperty(RUNNING_NS + "StartPeriod"));
-                String startPeriod = "";
-                if (startPeriodStmt != null) {
-                    startPeriod = startPeriodStmt.getString();
-                }
-                runningEventRes.setStartPeriod(startPeriod);
 
                 float highestConfidence = 0;
                 StmtIterator i4 = inf.listStatements(runningEvent, inf.createProperty(RUNNING_NS + "confidence"), (RDFNode) null);
@@ -407,6 +394,8 @@ public class AllRecommendation {
                 RunningEvents.RaceTypes raceTypes = new RunningEvents.RaceTypes();
                 RunningEvents.Prices prices = new RunningEvents.Prices();
                 RunningEvents.Rewards rewards = new RunningEvents.Rewards();
+                RunningEvents.ActivityAreas activityAreas = new RunningEvents.ActivityAreas();
+                RunningEvents.StartPeriods startPeriods = new RunningEvents.StartPeriods();
                 
                 while (raceTypeStmts.hasNext()) {
                     Statement stmt = raceTypeStmts.nextStatement();
@@ -435,10 +424,28 @@ public class AllRecommendation {
                             rewards.getReward().add(reward);
                         }
                     }
+
+                    Statement startPeriodStmt = raceTypeRes.getProperty(inf.createProperty(RUNNING_NS + "StartPeriod"));
+                    if (startPeriodStmt != null) {
+                        String startPeriod = startPeriodStmt.getString();
+                        if (!startPeriods.getStartPeriod().contains(startPeriod)) {
+                            startPeriods.getStartPeriod().add(startPeriod);
+                        }
+                    }
+
+                    Statement activityAreaStmt = raceTypeRes.getProperty(inf.createProperty(RUNNING_NS + "ActivityArea"));
+                    if (activityAreaStmt != null) {
+                        String activityArea = activityAreaStmt.getString();
+                        if (!activityAreas.getActivityArea().contains(activityArea)) {
+                            activityAreas.getActivityArea().add(activityArea);
+                        }
+                    }
                 }
                 runningEventRes.setRaceTypes(raceTypes);
                 runningEventRes.setPrices(prices);
                 runningEventRes.setRewards(rewards);
+                runningEventRes.setActivityAreas(activityAreas);
+                runningEventRes.setStartPeriods(startPeriods);
                 
                 StmtIterator travelPlaceStmts = inf.listStatements(runningEvent, inf.createProperty(RUNNING_NS + "hasTravelPlaceRecommend"), (RDFNode) null);
                 while (travelPlaceStmts.hasNext()) {
