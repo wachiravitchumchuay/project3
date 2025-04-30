@@ -454,8 +454,9 @@ public class AllRecommendation {
                     RunningEvents.TravelPlacesRunning travelPlaceRes = new RunningEvents.TravelPlacesRunning();
                 
                     if (statementObj2.isResource()) {
+
                         Resource travelPlace = statementObj2.asResource();
-                
+                        
                         Statement travelPlaceNameStmt2 = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "TravelPlaceName"));
                         String travelPlaceName = "";
                         if (travelPlaceNameStmt2 != null) {
@@ -463,42 +464,47 @@ public class AllRecommendation {
                         }
                         travelPlaceRes.setTravelPlaceName(travelPlaceName);
 
-                        Statement travelPlaceTypeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "TravelPlaceType"));
-                        String travelPlaceType = "";
-                        if (travelPlaceTypeStmt != null) {
-                            travelPlaceType = travelPlaceTypeStmt.getString();
+                        if (!travelPlaceName.isEmpty()) {
+                            Statement travelPlaceTypeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "TravelPlaceType"));
+                            String travelPlaceType = "";
+                            if (travelPlaceTypeStmt != null) {
+                                travelPlaceType = travelPlaceTypeStmt.getString();
+                            }
+                            travelPlaceRes.setTravelPlaceType(travelPlaceType);
+                    
+                            Statement districtStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "District"));
+                            String district2 = "";
+                            if (districtStmt != null) {
+                                district2 = districtStmt.getString();
+                            }
+                            travelPlaceRes.setDistrict(district2);
+                    
+                            Statement longitudeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "Longitude"));
+                            String longitude = "";
+                            if (longitudeStmt != null) {
+                                longitude = longitudeStmt.getString();
+                            }
+                            travelPlaceRes.setLongitude(longitude);
+            
+                            Statement latitudeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "Latitude"));
+                            String latitude = "";
+                            if (latitudeStmt != null) {
+                                latitude = latitudeStmt.getString();
+                            }
+                            travelPlaceRes.setLatitude(latitude);
+            
+                            Statement hotScoreStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "HotScore"));
+                            String hotScore = "";
+                            if (hotScoreStmt != null) {
+                                hotScore = hotScoreStmt.getString();
+                            }
+                            travelPlaceRes.setHotScore(hotScore);
+                    
+                            runningEventRes.getTravelPlacesRunning().add(travelPlaceRes);
                         }
-                        travelPlaceRes.setTravelPlaceType(travelPlaceType);
-                
-                        Statement districtStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "District"));
-                        String district2 = "";
-                        if (districtStmt != null) {
-                            district2 = districtStmt.getString();
-                        }
-                        travelPlaceRes.setDistrict(district2);
-                
-                        Statement longitudeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "Longitude"));
-                        String longitude = "";
-                        if (longitudeStmt != null) {
-                            longitude = longitudeStmt.getString();
-                        }
-                        travelPlaceRes.setLongitude(longitude);
-        
-                        Statement latitudeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "Latitude"));
-                        String latitude = "";
-                        if (latitudeStmt != null) {
-                            latitude = latitudeStmt.getString();
-                        }
-                        travelPlaceRes.setLatitude(latitude);
-        
-                        Statement hotScoreStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "HotScore"));
-                        String hotScore = "";
-                        if (hotScoreStmt != null) {
-                            hotScore = hotScoreStmt.getString();
-                        }
-                        travelPlaceRes.setHotScore(hotScore);
-                
-                        runningEventRes.getTravelPlacesRunning().add(travelPlaceRes);
+
+
+
                     }
                 }
                 response.getRunningEvents().add(runningEventRes);
@@ -521,40 +527,42 @@ public class AllRecommendation {
                 }
                 travelPlaceRes.setTravelPlaceName(travelPlaceName);
 
-                Statement travelPlaceTypeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "TravelPlaceType"));
-                String travelPlaceType = "";
-                if (travelPlaceTypeStmt != null) {
-                    travelPlaceType = travelPlaceTypeStmt.getString();
+                if (!travelPlaceName.isEmpty()) {
+                    Statement travelPlaceTypeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "TravelPlaceType"));
+                    String travelPlaceType = "";
+                    if (travelPlaceTypeStmt != null) {
+                        travelPlaceType = travelPlaceTypeStmt.getString();
+                    }
+                    travelPlaceRes.setTravelPlaceType(travelPlaceType);
+    
+                    Statement districtStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "District"));
+                    String district = "";
+                    if (districtStmt != null) {
+                        district = districtStmt.getString();
+                    }
+                    travelPlaceRes.setDistrict(district);
+    
+                    Statement longitudeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "Longitude"));
+                    String longitude = "";
+                    if (longitudeStmt != null) {
+                        longitude = longitudeStmt.getString();
+                    }
+                    travelPlaceRes.setLongitude(longitude);
+    
+                    Statement latitudeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "Latitude"));
+                    String latitude = "";
+                    if (latitudeStmt != null) {
+                        latitude = latitudeStmt.getString();
+                    }
+                    travelPlaceRes.setLatitude(latitude);
+    
+                    Statement hotScoreStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "HotScore"));
+                    String hotScore = "";
+                    if (hotScoreStmt != null) {
+                        hotScore = hotScoreStmt.getString();
+                    }
+                    travelPlaceRes.setHotScore(hotScore);
                 }
-                travelPlaceRes.setTravelPlaceType(travelPlaceType);
-
-                Statement districtStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "District"));
-                String district = "";
-                if (districtStmt != null) {
-                    district = districtStmt.getString();
-                }
-                travelPlaceRes.setDistrict(district);
-
-                Statement longitudeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "Longitude"));
-                String longitude = "";
-                if (longitudeStmt != null) {
-                    longitude = longitudeStmt.getString();
-                }
-                travelPlaceRes.setLongitude(longitude);
-
-                Statement latitudeStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "Latitude"));
-                String latitude = "";
-                if (latitudeStmt != null) {
-                    latitude = latitudeStmt.getString();
-                }
-                travelPlaceRes.setLatitude(latitude);
-
-                Statement hotScoreStmt = travelPlace.getProperty(inf.createProperty(RUNNING_NS + "HotScore"));
-                String hotScore = "";
-                if (hotScoreStmt != null) {
-                    hotScore = hotScoreStmt.getString();
-                }
-                travelPlaceRes.setHotScore(hotScore);
 
                 response.getTravelPlaces().add(travelPlaceRes);
             }
