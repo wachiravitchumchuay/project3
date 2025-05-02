@@ -12,6 +12,7 @@ import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
@@ -19,6 +20,8 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import demo.project3.schema.CreateUserProfileRequest;
 import demo.project3.schema.CreateUserProfileResponse;
 
+
+@Endpoint
 public class CreateUserProfileEndpoint {
 
     private static final String NAMESPACE_URI = "http://project3.demo/schema";
@@ -105,7 +108,7 @@ public class CreateUserProfileEndpoint {
             Individual raceTypeInstance = model.getIndividual(RUNNING_NS + request.getRaceType());
             userInstance.addProperty(hasRacetype, raceTypeInstance);
 
-            try (FileOutputStream out = new FileOutputStream("src/main/resources/RunningEventOntologyFinal2.rdf")) {
+            try (FileOutputStream out = new FileOutputStream("data/RunningEventOntology.rdf")) {
                 model.write(out, "RDF/XML");
                 System.out.println("Saved user instance to ontology.");
             } catch (IOException e) {
