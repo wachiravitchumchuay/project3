@@ -77,11 +77,11 @@ import demo.project3.schema.GetRestaurantRecommendationResponse.Restaurants;
 //    </soapenv:Body>
 // </soapenv:Envelope>
 @Endpoint
-public class RestaurantRecommendationEndpoint {
+public class GetRestaurantRecommendationEndpoint {
 
     private static final String NAMESPACE_URI = "http://project3.demo/schema";
     private static final String ONTOLOGY_FILE = "RestaurantOntology_03_12_24.rdf";
-    private static final String RULES_FILE = "rule.rules";
+    private static final String RULES_FILE = "restaurant.rules";
     private static final String NS = "http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#";
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getRestaurantRecommendationRequest")

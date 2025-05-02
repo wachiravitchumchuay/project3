@@ -35,16 +35,16 @@ import demo.project3.schema.GetAllRecommendationResponse.TravelPlaces;
 
 
 @Endpoint
-public class AllRecommendationEndpoint {
+public class GetAllRecommendationEndpoint {
 
     private static final String NAMESPACE_URI = "http://project3.demo/schema";
 
     private static final String RESTAURANT_ONTOLOGY_FILE = "RestaurantOntology_03_12_24.rdf";
-    private static final String RESTAURANT_RULES_FILE = "rule.rules";
+    private static final String RESTAURANT_RULES_FILE = "restaurant.rules";
     private static final String RESTAURANT_NS = "http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#";
 
     private static final String RUNNING_ONTOLOGY_FILE = "RunningEventOntologyFinal2.rdf"; // include travel place
-    private static final String RUNNING_RULES_FILE = "testrules1.rules";
+    private static final String RUNNING_RULES_FILE = "runningEvent.rules";
     private static final String RUNNING_NS = "http://www.semanticweb.org/guind/ontologies/runningeventontology#";
 
     private static final String TRAVELPLACE_RULES_FILE = "travelPlaceRule.rules";

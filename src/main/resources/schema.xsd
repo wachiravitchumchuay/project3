@@ -1,12 +1,12 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://project3.demo/schema"
 	xmlns="http://project3.demo/schema">
 
-	<xs:element name="getRestaurantRequest">
+	<xs:element name="getAllRestaurantRequest">
 		<xs:complexType>
 			<xs:sequence/>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="getRestaurantResponse">
+	<xs:element name="getAllRestaurantResponse">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="restaurants" minOccurs="0" maxOccurs="unbounded">

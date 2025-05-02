@@ -25,13 +25,13 @@ import demo.project3.schema.GetRestaurantResponse.Restaurants;
 // </soapenv:Envelope>
 
 @Endpoint
-public class RestaurantEndpoint {
+public class GetAllRestaurantEndpoint {
 
 	private static final String NAMESPACE_URI = "http://project3.demo/schema";
 	private static final String ONTOLOGY_FILE = "RestaurantOntology_03_12_24.rdf";
 	private static final String NS = "http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#";
 
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getRestaurantRequest")
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllRestaurantRequest")
 	@ResponsePayload
 	public GetRestaurantResponse getRestaurant(@RequestPayload GetRestaurantRequest request) {
 		GetRestaurantResponse response = new GetRestaurantResponse();
