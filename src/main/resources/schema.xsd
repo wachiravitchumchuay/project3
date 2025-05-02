@@ -215,4 +215,110 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+
+	<xs:element name="createUserProfileRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="username" type="xs:string" minOccurs="0"/>
+				<xs:element name="password" type="xs:string" minOccurs="0"/>
+				<xs:element name="district" type="xs:string" minOccurs="0"/>
+				<xs:element name="raceType" type="xs:string" minOccurs="0"/>
+				<xs:element name="typeofEvent" type="xs:string" minOccurs="0"/>
+				<xs:element name="travelPlaceType" type="xs:string" minOccurs="0"/>
+				<xs:element name="price" type="xs:string" minOccurs="0"/>
+				<xs:element name="organization" type="xs:string" minOccurs="0"/>
+				<xs:element name="activityArea" type="xs:string" minOccurs="0"/>
+				<xs:element name="standard" type="xs:string" minOccurs="0"/>
+				<xs:element name="level" type="xs:string" minOccurs="0"/>
+				<xs:element name="startPeriod" type="xs:string" minOccurs="0"/>
+				<xs:element name="reward" type="xs:string" minOccurs="0"/>
+				<xs:element name="PostRunCarbConsumtion" type="xs:string" minOccurs="0"/>
+				<xs:element name="PostRunFatConsumtion" type="xs:string" minOccurs="0"/>
+				<xs:element name="PostRunProteinConsumtion" type="xs:string" minOccurs="0"/>
+				<xs:element name="PreRunCarbConsumtion" type="xs:string" minOccurs="0"/>
+				<xs:element name="PreRunFatConsumtion" type="xs:string" minOccurs="0"/>
+				<xs:element name="PreRunProteinConsumtion" type="xs:string" minOccurs="0"/>
+				<xs:element name="hasRestaurantTypeInterest" type="xs:string" minOccurs="0"/>
+				<xs:element name="RunnerType" type="xs:string" minOccurs="0"/>
+				<xs:element name="BudgetInteresets" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="BudgetIntereset" type="xs:string" minOccurs="0" maxOccurs="2"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="hasFoodTypeInterests" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="hasFoodTypeInterest" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createUserProfileResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="restaurants" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="status" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getUserProfileRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="username" type="xs:string" minOccurs="0"/>
+				<xs:element name="password" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getUserProfileResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="username" type="xs:string" minOccurs="0"/>
+				<xs:element name="district" type="xs:string" minOccurs="0"/>
+				<xs:element name="raceType" type="xs:string" minOccurs="0"/>
+				<xs:element name="typeofEvent" type="xs:string" minOccurs="0"/>
+				<xs:element name="travelPlaceType" type="xs:string" minOccurs="0"/>
+				<xs:element name="price" type="xs:string" minOccurs="0"/>
+				<xs:element name="organization" type="xs:string" minOccurs="0"/>
+				<xs:element name="activityArea" type="xs:string" minOccurs="0"/>
+				<xs:element name="standard" type="xs:string" minOccurs="0"/>
+				<xs:element name="level" type="xs:string" minOccurs="0"/>
+				<xs:element name="startPeriod" type="xs:string" minOccurs="0"/>
+				<xs:element name="reward" type="xs:string" minOccurs="0"/>
+				<xs:element name="PostRunCarbConsumtion" type="xs:string" minOccurs="0"/>
+				<xs:element name="PostRunFatConsumtion" type="xs:string" minOccurs="0"/>
+				<xs:element name="PostRunProteinConsumtion" type="xs:string" minOccurs="0"/>
+				<xs:element name="PreRunCarbConsumtion" type="xs:string" minOccurs="0"/>
+				<xs:element name="PreRunFatConsumtion" type="xs:string" minOccurs="0"/>
+				<xs:element name="PreRunProteinConsumtion" type="xs:string" minOccurs="0"/>
+				<xs:element name="hasRestaurantTypeInterest" type="xs:string" minOccurs="0"/>
+				<xs:element name="RunnerType" type="xs:string" minOccurs="0"/>
+				<xs:element name="BudgetInteresets" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="BudgetIntereset" type="xs:string" minOccurs="0" maxOccurs="2"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="hasFoodTypeInterests" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="hasFoodTypeInterest" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
 </xs:schema>

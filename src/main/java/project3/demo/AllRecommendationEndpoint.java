@@ -35,7 +35,7 @@ import demo.project3.schema.GetAllRecommendationResponse.TravelPlaces;
 
 
 @Endpoint
-public class AllRecommendation {
+public class AllRecommendationEndpoint {
 
     private static final String NAMESPACE_URI = "http://project3.demo/schema";
 

@@ -27,6 +27,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="district" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="raceType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="typeofEvent" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
@@ -78,6 +80,8 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "username",
+    "password",
     "district",
     "raceType",
     "typeofEvent",
@@ -100,9 +104,11 @@ import jakarta.xml.bind.annotation.XmlType;
     "budgetInteresets",
     "hasFoodTypeInterests"
 })
-@XmlRootElement(name = "getAllRecommendationRequest")
-public class GetAllRecommendationRequest {
+@XmlRootElement(name = "createUserProfileRequest")
+public class CreateUserProfileRequest {
 
+    protected String username;
+    protected String password;
     protected String district;
     protected String raceType;
     protected String typeofEvent;
@@ -130,8 +136,56 @@ public class GetAllRecommendationRequest {
     @XmlElement(name = "RunnerType")
     protected String runnerType;
     @XmlElement(name = "BudgetInteresets")
-    protected GetAllRecommendationRequest.BudgetInteresets budgetInteresets;
-    protected GetAllRecommendationRequest.HasFoodTypeInterests hasFoodTypeInterests;
+    protected CreateUserProfileRequest.BudgetInteresets budgetInteresets;
+    protected CreateUserProfileRequest.HasFoodTypeInterests hasFoodTypeInterests;
+
+    /**
+     * Gets the value of the username property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * Sets the value of the username property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUsername(String value) {
+        this.username = value;
+    }
+
+    /**
+     * Gets the value of the password property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Sets the value of the password property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPassword(String value) {
+        this.password = value;
+    }
 
     /**
      * Gets the value of the district property.
@@ -594,10 +648,10 @@ public class GetAllRecommendationRequest {
      * 
      * @return
      *     possible object is
-     *     {@link GetAllRecommendationRequest.BudgetInteresets }
+     *     {@link CreateUserProfileRequest.BudgetInteresets }
      *     
      */
-    public GetAllRecommendationRequest.BudgetInteresets getBudgetInteresets() {
+    public CreateUserProfileRequest.BudgetInteresets getBudgetInteresets() {
         return budgetInteresets;
     }
 
@@ -606,10 +660,10 @@ public class GetAllRecommendationRequest {
      * 
      * @param value
      *     allowed object is
-     *     {@link GetAllRecommendationRequest.BudgetInteresets }
+     *     {@link CreateUserProfileRequest.BudgetInteresets }
      *     
      */
-    public void setBudgetInteresets(GetAllRecommendationRequest.BudgetInteresets value) {
+    public void setBudgetInteresets(CreateUserProfileRequest.BudgetInteresets value) {
         this.budgetInteresets = value;
     }
 
@@ -618,10 +672,10 @@ public class GetAllRecommendationRequest {
      * 
      * @return
      *     possible object is
-     *     {@link GetAllRecommendationRequest.HasFoodTypeInterests }
+     *     {@link CreateUserProfileRequest.HasFoodTypeInterests }
      *     
      */
-    public GetAllRecommendationRequest.HasFoodTypeInterests getHasFoodTypeInterests() {
+    public CreateUserProfileRequest.HasFoodTypeInterests getHasFoodTypeInterests() {
         return hasFoodTypeInterests;
     }
 
@@ -630,10 +684,10 @@ public class GetAllRecommendationRequest {
      * 
      * @param value
      *     allowed object is
-     *     {@link GetAllRecommendationRequest.HasFoodTypeInterests }
+     *     {@link CreateUserProfileRequest.HasFoodTypeInterests }
      *     
      */
-    public void setHasFoodTypeInterests(GetAllRecommendationRequest.HasFoodTypeInterests value) {
+    public void setHasFoodTypeInterests(CreateUserProfileRequest.HasFoodTypeInterests value) {
         this.hasFoodTypeInterests = value;
     }
 

@@ -27,6 +27,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="district" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="raceType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="typeofEvent" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
@@ -78,6 +79,7 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "username",
     "district",
     "raceType",
     "typeofEvent",
@@ -100,9 +102,10 @@ import jakarta.xml.bind.annotation.XmlType;
     "budgetInteresets",
     "hasFoodTypeInterests"
 })
-@XmlRootElement(name = "getAllRecommendationRequest")
-public class GetAllRecommendationRequest {
+@XmlRootElement(name = "getUserProfileResponse")
+public class GetUserProfileResponse {
 
+    protected String username;
     protected String district;
     protected String raceType;
     protected String typeofEvent;
@@ -130,8 +133,32 @@ public class GetAllRecommendationRequest {
     @XmlElement(name = "RunnerType")
     protected String runnerType;
     @XmlElement(name = "BudgetInteresets")
-    protected GetAllRecommendationRequest.BudgetInteresets budgetInteresets;
-    protected GetAllRecommendationRequest.HasFoodTypeInterests hasFoodTypeInterests;
+    protected GetUserProfileResponse.BudgetInteresets budgetInteresets;
+    protected GetUserProfileResponse.HasFoodTypeInterests hasFoodTypeInterests;
+
+    /**
+     * Gets the value of the username property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * Sets the value of the username property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUsername(String value) {
+        this.username = value;
+    }
 
     /**
      * Gets the value of the district property.
@@ -594,10 +621,10 @@ public class GetAllRecommendationRequest {
      * 
      * @return
      *     possible object is
-     *     {@link GetAllRecommendationRequest.BudgetInteresets }
+     *     {@link GetUserProfileResponse.BudgetInteresets }
      *     
      */
-    public GetAllRecommendationRequest.BudgetInteresets getBudgetInteresets() {
+    public GetUserProfileResponse.BudgetInteresets getBudgetInteresets() {
         return budgetInteresets;
     }
 
@@ -606,10 +633,10 @@ public class GetAllRecommendationRequest {
      * 
      * @param value
      *     allowed object is
-     *     {@link GetAllRecommendationRequest.BudgetInteresets }
+     *     {@link GetUserProfileResponse.BudgetInteresets }
      *     
      */
-    public void setBudgetInteresets(GetAllRecommendationRequest.BudgetInteresets value) {
+    public void setBudgetInteresets(GetUserProfileResponse.BudgetInteresets value) {
         this.budgetInteresets = value;
     }
 
@@ -618,10 +645,10 @@ public class GetAllRecommendationRequest {
      * 
      * @return
      *     possible object is
-     *     {@link GetAllRecommendationRequest.HasFoodTypeInterests }
+     *     {@link GetUserProfileResponse.HasFoodTypeInterests }
      *     
      */
-    public GetAllRecommendationRequest.HasFoodTypeInterests getHasFoodTypeInterests() {
+    public GetUserProfileResponse.HasFoodTypeInterests getHasFoodTypeInterests() {
         return hasFoodTypeInterests;
     }
 
@@ -630,10 +657,10 @@ public class GetAllRecommendationRequest {
      * 
      * @param value
      *     allowed object is
-     *     {@link GetAllRecommendationRequest.HasFoodTypeInterests }
+     *     {@link GetUserProfileResponse.HasFoodTypeInterests }
      *     
      */
-    public void setHasFoodTypeInterests(GetAllRecommendationRequest.HasFoodTypeInterests value) {
+    public void setHasFoodTypeInterests(GetUserProfileResponse.HasFoodTypeInterests value) {
         this.hasFoodTypeInterests = value;
     }
 
