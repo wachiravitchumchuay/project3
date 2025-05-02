@@ -12,9 +12,9 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import demo.project3.schema.GetRestaurantRequest;
-import demo.project3.schema.GetRestaurantResponse;
-import demo.project3.schema.GetRestaurantResponse.Restaurants;
+import demo.project3.schema.GetAllRestaurantRequest;
+import demo.project3.schema.GetAllRestaurantResponse;
+import demo.project3.schema.GetAllRestaurantResponse.Restaurants;
 
 // <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://project3.demo/schema">
 //    <soapenv:Header/>
@@ -28,13 +28,13 @@ import demo.project3.schema.GetRestaurantResponse.Restaurants;
 public class GetAllRestaurantEndpoint {
 
 	private static final String NAMESPACE_URI = "http://project3.demo/schema";
-	private static final String ONTOLOGY_FILE = "RestaurantOntology_03_12_24.rdf";
+	private static final String ONTOLOGY_FILE = "data/RestaurantOntology.rdf";
 	private static final String NS = "http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#";
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllRestaurantRequest")
 	@ResponsePayload
-	public GetRestaurantResponse getRestaurant(@RequestPayload GetRestaurantRequest request) {
-		GetRestaurantResponse response = new GetRestaurantResponse();
+	public GetAllRestaurantResponse getRestaurant(@RequestPayload GetAllRestaurantRequest request) {
+		GetAllRestaurantResponse response = new GetAllRestaurantResponse();
 
 		Model model = RDFDataMgr.loadModel(ONTOLOGY_FILE);
 		StmtIterator restauranIterator = model.listStatements(null, RDF.type, model.createResource(NS + "Restaurant"));

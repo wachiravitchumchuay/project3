@@ -39,11 +39,11 @@ public class GetAllRecommendationEndpoint {
 
     private static final String NAMESPACE_URI = "http://project3.demo/schema";
 
-    private static final String RESTAURANT_ONTOLOGY_FILE = "RestaurantOntology_03_12_24.rdf";
+    private static final String RESTAURANT_ONTOLOGY_FILE = "data/RestaurantOntology.rdf";
     private static final String RESTAURANT_RULES_FILE = "restaurant.rules";
     private static final String RESTAURANT_NS = "http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#";
 
-    private static final String RUNNING_ONTOLOGY_FILE = "RunningEventOntologyFinal2.rdf"; // include travel place
+    private static final String RUNNING_ONTOLOGY_FILE = "data/RunningEventOntology.rdf";
     private static final String RUNNING_RULES_FILE = "runningEvent.rules";
     private static final String RUNNING_NS = "http://www.semanticweb.org/guind/ontologies/runningeventontology#";
 
@@ -51,7 +51,7 @@ public class GetAllRecommendationEndpoint {
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllRecommendationRequest")
     @ResponsePayload
-    public GetAllRecommendationResponse test(@RequestPayload GetAllRecommendationRequest request) {
+    public GetAllRecommendationResponse getAllRecommendation(@RequestPayload GetAllRecommendationRequest request) {
         GetAllRecommendationResponse response = new GetAllRecommendationResponse();
         System.out.println("Begin getAllRecommendationRequest");
 
@@ -125,7 +125,7 @@ public class GetAllRecommendationEndpoint {
         userInstance.addProperty(Reward, request.getReward());
 
         Individual organizationInstance = model.getIndividual(RUNNING_NS + request.getOrganization());
-        userInstance.addProperty(hasOrganization, organizationInstance); // 
+        userInstance.addProperty(hasOrganization, organizationInstance); 
 
 
         Individual raceTypeInstance = model.getIndividual(RUNNING_NS + request.getRaceType());
