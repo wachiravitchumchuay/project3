@@ -170,7 +170,6 @@ public class GetRestaurantRecommendationEndpoint {
         InfModel inf = ModelFactory.createInfModel(reasoner, model);
         Resource user = inf.getResource(userURI);
         Property p = inf.getProperty(NS, "hasRecommend");
-        // Property c = inf.getProperty(NS, "confidence");
         StmtIterator i1 = inf.listStatements(user, p, (RDFNode) null);
 
 

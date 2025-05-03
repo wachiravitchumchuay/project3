@@ -27676,6 +27676,63 @@
     
 
 
+    <!-- http://www.semanticweb.org/guind/ontologies/runningeventontology#testUser3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/guind/ontologies/runningeventontology#testUser3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#User"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/guind/ontologies/runningeventontology#User"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#ALaCarte_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Bakery_Cake_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Breakfast_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#BubbleMilkTea_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Buffet_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Burger_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#CleanFood_Salad_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Dessert_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Dimsum_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#DrinksJuice_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#FastFood_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Grill_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#GrilledPork_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#IceCream_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Noodles_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Omakase_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#OneDishMeal_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Pizza_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Ramen_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Seafood_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Shabu_Sukiyaki_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Steak_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Sushi_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#VegatarianFood_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Vegatarian_Jay_Type"/>
+        <re:hasRestaurantTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Fast_Dining_Type"/>
+        <hasOrganizationInterest rdf:resource="http://www.semanticweb.org/guind/ontologies/runningeventontology#SirirojHospital"/>
+        <hasRaceTypeInterest rdf:resource="http://www.semanticweb.org/guind/ontologies/runningeventontology#Marathon"/>
+        <re:BudgetInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#float">301.0</re:BudgetInterest>
+        <re:BudgetInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#float">600.0</re:BudgetInterest>
+        <re:PostRunCarbConsumtion>Medium</re:PostRunCarbConsumtion>
+        <re:PostRunFatConsumtion>Medium</re:PostRunFatConsumtion>
+        <re:PostRunProteinConsumtion>Medium</re:PostRunProteinConsumtion>
+        <re:PreRunCarbConsumtion>Medium</re:PreRunCarbConsumtion>
+        <re:PreRunFatConsumtion>Medium</re:PreRunFatConsumtion>
+        <re:PreRunProteinConsumtion>Medium</re:PreRunProteinConsumtion>
+        <re:RunnerType>Fun run</re:RunnerType>
+        <ActivityAreaInterest>Natural</ActivityAreaInterest>
+        <EventPriceInterest>Average</EventPriceInterest>
+        <LevelEventInterest>InternationalEvent</LevelEventInterest>
+        <LocationInterest>Thalang District</LocationInterest>
+        <Password>$2a$10$Og3R/dTrGMkzVY8i8JZ7guaiNKSOr3bHnnKdXsovz3dnO0z/fZ5Am</Password>
+        <RewardInterest>Medal</RewardInterest>
+        <StandardEventInterest>StandardEvent</StandardEventInterest>
+        <StartPeriodInterest>Morning</StartPeriodInterest>
+        <TravelPlaceTypeInterest>Natural</TravelPlaceTypeInterest>
+        <TypeOfEventInterest>CharityEvent</TypeOfEventInterest>
+        <Username>testUser3</Username>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/guind/ontologies/runningeventontology#testa -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/guind/ontologies/runningeventontology#testa">
@@ -27734,6 +27791,57 @@
             </owl:Restriction>
         </rdf:type>
         <hasRaceTypeInterest rdf:resource="http://www.semanticweb.org/guind/ontologies/runningeventontology#FunRun"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/guind/ontologies/runningeventontology#user1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/guind/ontologies/runningeventontology#user1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#User"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/guind/ontologies/runningeventontology#User"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#ALaCarte_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Bakery_Cake_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Breakfast_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#BubbleMilkTea_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Buffet_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Burger_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#CleanFood_Salad_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Dessert_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Dimsum_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#DrinksJuice_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#FastFood_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Grill_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#GrilledPork_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#IceCream_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Noodles_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Omakase_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#OneDishMeal_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Pizza_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Ramen_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Seafood_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Shabu_Sukiyaki_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Steak_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Sushi_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#VegatarianFood_Type"/>
+        <re:hasFoodTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Vegatarian_Jay_Type"/>
+        <re:hasRestaurantTypeInterest rdf:resource="http://www.semanticweb.org/acer/ontologies/2567/8/restaurantontologyfinal#Fast_Dining_Type"/>
+        <hasOrganizationInterest rdf:resource="http://www.semanticweb.org/guind/ontologies/runningeventontology#SirirojHospital"/>
+        <hasRaceTypeInterest rdf:resource="http://www.semanticweb.org/guind/ontologies/runningeventontology#FunRun"/>
+        <re:BudgetInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#float">301.0</re:BudgetInterest>
+        <re:BudgetInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#float">600.0</re:BudgetInterest>
+        <re:RunnerType>Fun run</re:RunnerType>
+        <ActivityAreaInterest>Natural</ActivityAreaInterest>
+        <EventPriceInterest>Average</EventPriceInterest>
+        <LevelEventInterest>InternationalEvent</LevelEventInterest>
+        <LocationInterest>Thalang District</LocationInterest>
+        <Password>$2a$10$kyfNhPlD08Za3U54rG.weOYg/Vuem3RHVSckKjFkGQCUr9y4lRkVG</Password>
+        <RewardInterest>Medal</RewardInterest>
+        <StandardEventInterest>StandardEvent</StandardEventInterest>
+        <StartPeriodInterest>Morning</StartPeriodInterest>
+        <TravelPlaceTypeInterest>Natural</TravelPlaceTypeInterest>
+        <TypeOfEventInterest>CharityEvent</TypeOfEventInterest>
+        <Username>user1</Username>
     </owl:NamedIndividual>
     
 

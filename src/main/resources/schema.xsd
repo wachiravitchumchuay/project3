@@ -277,6 +277,8 @@
 	<xs:element name="getUserProfileResponse">
 		<xs:complexType>
 			<xs:sequence>
+				<xs:element name="status" type="xs:string" minOccurs="0"/>
+				<xs:element name="message" type="xs:string" minOccurs="0"/>
 				<xs:element name="username" type="xs:string" minOccurs="0"/>
 				<xs:element name="district" type="xs:string" minOccurs="0"/>
 				<xs:element name="raceType" type="xs:string" minOccurs="0"/>
@@ -300,7 +302,7 @@
 				<xs:element name="BudgetInteresets" minOccurs="0">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="BudgetIntereset" type="xs:string" minOccurs="0" maxOccurs="2"/>
+							<xs:element name="BudgetInterest" type="xs:string" minOccurs="0" maxOccurs="2"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>

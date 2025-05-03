@@ -12,6 +12,7 @@ import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -19,7 +20,6 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import demo.project3.schema.CreateUserProfileRequest;
 import demo.project3.schema.CreateUserProfileResponse;
-
 
 @Endpoint
 public class CreateUserProfileEndpoint {
@@ -31,6 +31,8 @@ public class CreateUserProfileEndpoint {
 
     private static final String RUNNING_ONTOLOGY_FILE = "data/RunningEventOntology.rdf";
     private static final String RUNNING_NS = "http://www.semanticweb.org/guind/ontologies/runningeventontology#";
+
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "createUserProfileRequest")
     @ResponsePayload
@@ -67,6 +69,10 @@ public class CreateUserProfileEndpoint {
         OntProperty PlaceType = model.getDatatypeProperty(RUNNING_NS + "TravelPlaceTypeInterest");
         OntProperty hasRacetype = model.getObjectProperty(RUNNING_NS + "hasRaceTypeInterest");
         OntProperty hasOrganization = model.getObjectProperty(RUNNING_NS + "hasOrganizationInterest");
+        OntProperty Username = model.getDatatypeProperty(RUNNING_NS + "Username");
+        OntProperty Password = model.getDatatypeProperty(RUNNING_NS + "Password");
+        
+
 
         OntClass userClassRes = model.getOntClass(RESTAURANT_NS + "User");
         OntClass userClassRun = model.getOntClass(RUNNING_NS + "User");
@@ -79,6 +85,9 @@ public class CreateUserProfileEndpoint {
             Resource userInstance = model.createResource(userURI);
             userInstance.addProperty(RDF.type, userClassRes);
             userInstance.addProperty(RDF.type, userClassRun);
+
+            userInstance.addProperty(Username, request.getUsername());    
+            userInstance.addProperty(Password,encoder.encode(request.getPassword())); //hashed password
 
             userInstance.addProperty(RunnerType, request.getRunnerType());
             for (String budget : request.getBudgetInteresets().getBudgetIntereset()) {
@@ -107,6 +116,14 @@ public class CreateUserProfileEndpoint {
 
             Individual raceTypeInstance = model.getIndividual(RUNNING_NS + request.getRaceType());
             userInstance.addProperty(hasRacetype, raceTypeInstance);
+
+            userInstance.addProperty(PostRunCarbConsumtion, request.getPostRunCarbConsumtion());
+            userInstance.addProperty(PostRunFatConsumtion, request.getPostRunFatConsumtion());
+            userInstance.addProperty(PostRunProteinConsumtion, request.getPostRunProteinConsumtion());
+    
+            userInstance.addProperty(PreRunCarbConsumtion, request.getPreRunCarbConsumtion());
+            userInstance.addProperty(PreRunFatConsumtion, request.getPreRunFatConsumtion());
+            userInstance.addProperty(PreRunProteinConsumtion, request.getPreRunProteinConsumtion());
 
             try (FileOutputStream out = new FileOutputStream("data/RunningEventOntology.rdf")) {
                 model.write(out, "RDF/XML");
