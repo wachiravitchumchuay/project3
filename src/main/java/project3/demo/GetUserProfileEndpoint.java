@@ -17,7 +17,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import demo.project3.schema.GetUserProfileRequest;
 import demo.project3.schema.GetUserProfileResponse;
-import demo.project3.schema.GetUserProfileResponse.BudgetInteresets;
+import demo.project3.schema.GetUserProfileResponse.BudgetInterests;
 import demo.project3.schema.GetUserProfileResponse.HasFoodTypeInterests;
 
 @Endpoint
@@ -52,7 +52,7 @@ public class GetUserProfileEndpoint {
 
         OntProperty RunnerType = model.getDatatypeProperty(RESTAURANT_NS + "RunnerType");
 
-        OntProperty BudgetIntereset = model.getDatatypeProperty(RESTAURANT_NS + "BudgetInterest");
+        OntProperty BudgetInterest = model.getDatatypeProperty(RESTAURANT_NS + "BudgetInterest");
 
         OntProperty hasRestaurantTypeInterest = model.getObjectProperty(RESTAURANT_NS + "hasRestaurantTypeInterest");
         OntProperty hasFoodTypeInterest = model.getObjectProperty(RESTAURANT_NS + "hasFoodTypeInterest");
@@ -112,11 +112,11 @@ public class GetUserProfileEndpoint {
             Resource organizationResource = user.getPropertyResourceValue(hasOrganization);
             String organization = organizationResource.getLocalName();
 
-            StmtIterator budgets = user.listProperties(BudgetIntereset);
-            BudgetInteresets budgetInteresetRes = new BudgetInteresets();
+            StmtIterator budgets = user.listProperties(BudgetInterest);
+            BudgetInterests budgetInterestRes = new BudgetInterests();
             while (budgets.hasNext()) {
                 String budget = budgets.nextStatement().getString();
-                budgetInteresetRes.getBudgetInterest().add(budget);
+                budgetInterestRes.getBudgetInterest().add(budget);
             }
 
             StmtIterator foodTypes = user.listProperties(hasFoodTypeInterest);
@@ -128,7 +128,7 @@ public class GetUserProfileEndpoint {
                 foodTypeRes.getHasFoodTypeInterest().add(type);
             }
 
-            response.setBudgetInteresets(budgetInteresetRes);
+            response.setBudgetInterests(budgetInterestRes);
             response.setHasFoodTypeInterests(foodTypeRes);
 
             response.setUsername(username);

@@ -40,10 +40,10 @@
 				<xs:element name="PreRunProteinConsumtion" type="xs:string"/>
 				<xs:element name="hasRestaurantTypeInterest" type="xs:string"/>
 				<xs:element name="RunnerType" type="xs:string"/>
-				<xs:element name="BudgetInteresets">
+				<xs:element name="BudgetInterests">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="BudgetIntereset" minOccurs="2" maxOccurs="2" type="xs:string"/>
+							<xs:element name="BudgetInterest" minOccurs="2" maxOccurs="2" type="xs:string"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
@@ -103,10 +103,10 @@
 				<xs:element name="PreRunProteinConsumtion" type="xs:string" minOccurs="0"/>
 				<xs:element name="hasRestaurantTypeInterest" type="xs:string" minOccurs="0"/>
 				<xs:element name="RunnerType" type="xs:string" minOccurs="0"/>
-				<xs:element name="BudgetInteresets" minOccurs="0">
+				<xs:element name="BudgetInterests" minOccurs="0">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="BudgetIntereset" type="xs:string" minOccurs="0" maxOccurs="2"/>
+							<xs:element name="BudgetInterest" type="xs:string" minOccurs="0" maxOccurs="2"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
@@ -240,10 +240,10 @@
 				<xs:element name="PreRunProteinConsumtion" type="xs:string" minOccurs="0"/>
 				<xs:element name="hasRestaurantTypeInterest" type="xs:string" minOccurs="0"/>
 				<xs:element name="RunnerType" type="xs:string" minOccurs="0"/>
-				<xs:element name="BudgetInteresets" minOccurs="0">
+				<xs:element name="BudgetInterests" minOccurs="0">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="BudgetIntereset" type="xs:string" minOccurs="0" maxOccurs="2"/>
+							<xs:element name="BudgetInterest" type="xs:string" minOccurs="0" maxOccurs="2"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
@@ -299,7 +299,7 @@
 				<xs:element name="PreRunProteinConsumtion" type="xs:string" minOccurs="0"/>
 				<xs:element name="hasRestaurantTypeInterest" type="xs:string" minOccurs="0"/>
 				<xs:element name="RunnerType" type="xs:string" minOccurs="0"/>
-				<xs:element name="BudgetInteresets" minOccurs="0">
+				<xs:element name="BudgetInterests" minOccurs="0">
 					<xs:complexType>
 						<xs:sequence>
 							<xs:element name="BudgetInterest" type="xs:string" minOccurs="0" maxOccurs="2"/>

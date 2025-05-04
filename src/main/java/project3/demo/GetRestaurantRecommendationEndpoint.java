@@ -30,52 +30,6 @@ import demo.project3.schema.GetRestaurantRecommendationRequest;
 import demo.project3.schema.GetRestaurantRecommendationResponse;
 import demo.project3.schema.GetRestaurantRecommendationResponse.Restaurants;
 
-// <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://project3.demo/schema">
-//    <soapenv:Header/>
-//    <soapenv:Body>
-//       <sch:getRestaurantRecommendationRequest>
-//          <PreRunCarbConsumtion>Medium</PreRunCarbConsumtion>
-//          <PreRunFatConsumtion>Medium</PreRunFatConsumtion>
-//          <PreRunProteinConsumtion>Medium</PreRunProteinConsumtion>
-//          <PostRunCarbConsumtion>Medium</PostRunCarbConsumtion>
-//          <PostRunFatConsumtion>Medium</PostRunFatConsumtion>
-//          <PostRunProteinConsumtion>Medium</PostRunProteinConsumtion>
-//          <RunnerType>Fun run</RunnerType>
-//          <BudgetInteresets>
-//             <BudgetIntereset>301.0</BudgetIntereset>
-//             <BudgetIntereset>600.0</BudgetIntereset>
-//          </BudgetInteresets>
-//          <hasRestaurantTypeInterest>Fast_Dining_Type</hasRestaurantTypeInterest>
-//          <hasFoodTypeInterests>
-//             <hasFoodTypeInterest>ALaCarte_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Bakery_Cake_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Breakfast_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>BubbleMilkTea_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Buffet_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Burger_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>CleanFood_Salad_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Dessert_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Dimsum_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>DrinksJuice_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>FastFood_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Grill_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>GrilledPork_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>IceCream_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Noodles_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Omakase_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>OneDishMeal_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Pizza_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Ramen_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Seafood_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Shabu_Sukiyaki_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Steak_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Sushi_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>VegatarianFood_Type</hasFoodTypeInterest>
-//             <hasFoodTypeInterest>Vegatarian_Jay_Type</hasFoodTypeInterest>
-//          </hasFoodTypeInterests>
-//       </sch:getRestaurantRecommendationRequest>
-//    </soapenv:Body>
-// </soapenv:Envelope>
 @Endpoint
 public class GetRestaurantRecommendationEndpoint {
 
@@ -104,7 +58,7 @@ public class GetRestaurantRecommendationEndpoint {
         System.out.println("Runner Type: " + request.getRunnerType());
 
         System.out.println("Budget Interests:");
-        for (String budget : request.getBudgetInteresets().getBudgetIntereset()) {
+        for (String budget : request.getBudgetInterests().getBudgetInterest()) {
             System.out.println("  - " + budget);
         }
 
@@ -128,7 +82,7 @@ public class GetRestaurantRecommendationEndpoint {
 
         OntProperty RunnerType = model.getDatatypeProperty(NS + "RunnerType");
 
-        OntProperty BudgetIntereset = model.getDatatypeProperty(NS + "BudgetInterest");
+        OntProperty BudgetInterest = model.getDatatypeProperty(NS + "BudgetInterest");
 
         OntProperty hasRestaurantTypeInterest = model.getObjectProperty(NS + "hasRestaurantTypeInterest");
         OntProperty hasFoodTypeInterest = model.getObjectProperty(NS + "hasFoodTypeInterest");
@@ -150,10 +104,10 @@ public class GetRestaurantRecommendationEndpoint {
 
         userInstance.addProperty(RunnerType, request.getRunnerType());
 
-        for (String budget : request.getBudgetInteresets().getBudgetIntereset()) {
+        for (String budget : request.getBudgetInterests().getBudgetInterest()) {
             float budgetFloat = Float.parseFloat(budget);
             Literal budgetLiteral = model.createTypedLiteral(budgetFloat);
-            userInstance.addProperty(BudgetIntereset, budgetLiteral);
+            userInstance.addProperty(BudgetInterest, budgetLiteral);
         }
         Individual restaurantInterest = model.getIndividual(NS + request.getHasRestaurantTypeInterest());
         userInstance.addProperty(hasRestaurantTypeInterest, restaurantInterest);

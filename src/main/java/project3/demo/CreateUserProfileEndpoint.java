@@ -53,7 +53,7 @@ public class CreateUserProfileEndpoint {
 
         OntProperty RunnerType = model.getDatatypeProperty(RESTAURANT_NS + "RunnerType");
 
-        OntProperty BudgetIntereset = model.getDatatypeProperty(RESTAURANT_NS + "BudgetInterest");
+        OntProperty BudgetInterest = model.getDatatypeProperty(RESTAURANT_NS + "BudgetInterest");
 
         OntProperty hasRestaurantTypeInterest = model.getObjectProperty(RESTAURANT_NS + "hasRestaurantTypeInterest");
         OntProperty hasFoodTypeInterest = model.getObjectProperty(RESTAURANT_NS + "hasFoodTypeInterest");
@@ -90,10 +90,10 @@ public class CreateUserProfileEndpoint {
             userInstance.addProperty(Password,encoder.encode(request.getPassword())); //hashed password
 
             userInstance.addProperty(RunnerType, request.getRunnerType());
-            for (String budget : request.getBudgetInteresets().getBudgetIntereset()) {
+            for (String budget : request.getBudgetInterests().getBudgetInterest()) {
                 float budgetFloat = Float.parseFloat(budget);
                 Literal budgetLiteral = model.createTypedLiteral(budgetFloat);
-                userInstance.addProperty(BudgetIntereset, budgetLiteral);
+                userInstance.addProperty(BudgetInterest, budgetLiteral);
             }
             Individual restaurantInterest = model.getIndividual(RESTAURANT_NS + request.getHasRestaurantTypeInterest());
             userInstance.addProperty(hasRestaurantTypeInterest, restaurantInterest);
